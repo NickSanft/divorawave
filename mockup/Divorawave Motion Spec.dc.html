@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&amp;family=Space+Grotesk:wght@400;500;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #0B001F; }
+    body { font-family: 'Space Grotesk', system-ui, sans-serif; }
+    a { color: #01CDFE; text-decoration: none; }
+    a:hover { color: #FFFB96; }
+    ::selection { background: #FF71CE; color: #12002E; }
+    @keyframes dvDemoOrb { 0% { transform: scale(.6); filter: blur(8px); opacity: 0; } 26% { transform: scale(1); filter: blur(0); opacity: 1; } 78% { transform: scale(1); filter: blur(0); opacity: 1; } 100% { transform: scale(1); filter: blur(0); opacity: 0; } }
+    @keyframes dvDemoBreathe { 0% { opacity: .55; } 50% { opacity: 1; } 100% { opacity: .55; } }
+    @keyframes dvDemoArc { 0% { offset-distance: 0%; transform: scale(1); opacity: 1; } 100% { offset-distance: 100%; transform: scale(.35); opacity: .2; } }
+  </style>
+</helmet>
+<div style="min-height:100vh; background:linear-gradient(180deg,#0B001F 0%,#12002E 45%,#160333 100%); color:#F4F0FF; padding:36px 0 72px">
+  <div style="width:min(1180px, 92vw); margin:0 auto; display:flex; flex-direction:column; gap:26px">
+
+    <header style="display:flex; align-items:baseline; justify-content:space-between; gap:20px; flex-wrap:wrap">
+      <div>
+        <div style="font-family:'Audiowide', sans-serif; font-size:22px; letter-spacing:.32em; background:linear-gradient(180deg,#FFFB96 20%,#FF71CE 55%,#B967FF 100%); -webkit-background-clip:text; background-clip:text; color:transparent">DIVORAWAVE</div>
+        <div style="font-family:'Space Mono', monospace; font-size:11px; letter-spacing:.28em; color:rgba(1,205,254,.8); margin-top:8px">MOTION SPEC — PHASE A · transform/opacity only · nothing over 3 Hz, ever</div>
+      </div>
+      <nav style="display:flex; gap:16px; font-family:'Space Mono', monospace; font-size:10.5px; letter-spacing:.1em">
+        <a href="Divorawave%20Prototype.dc.html">PROTOTYPE</a>
+        <a href="Divorawave%20Style%20Tile.dc.html">STYLE TILE</a>
+        <a href="Divorawave%20Tokens.dc.html">TOKENS</a>
+      </nav>
+    </header>
+
+    <section aria-label="Motion table" style="background:rgba(16,2,40,.55); border:1px solid rgba(1,205,254,.18); border-radius:14px; padding:22px 24px">
+      <div style="font-family:'Audiowide', sans-serif; font-size:11px; letter-spacing:.42em; color:rgba(122,222,250,.9)">THE EIGHT MOTIONS</div>
+      <div style="margin-top:16px; display:grid; grid-template-columns:150px 140px 210px 1fr 200px; gap:10px 16px; font-size:12px; line-height:1.55">
+        <span style="font-family:'Space Mono', monospace; font-size:10px; letter-spacing:.18em; color:rgba(1,205,254,.8)">MOTION</span><span style="font-family:'Space Mono', monospace; font-size:10px; letter-spacing:.18em; color:rgba(1,205,254,.8)">TRIGGER</span><span style="font-family:'Space Mono', monospace; font-size:10px; letter-spacing:.18em; color:rgba(1,205,254,.8)">TIMING</span><span style="font-family:'Space Mono', monospace; font-size:10px; letter-spacing:.18em; color:rgba(1,205,254,.8)">PROPERTIES</span><span style="font-family:'Space Mono', monospace; font-size:10px; letter-spacing:.18em; color:rgba(1,205,254,.8)">REDUCED MOTION</span>
+
+        <span style="color:#FFFB96">1 · Orb materialize</span><span style="color:rgba(244,240,255,.75)">suggestions change</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.75)">400ms · pop ease¹ · stagger 60ms by rank</span><span style="color:rgba(244,240,255,.75)">scale .6→1 · blur 8→0 · opacity 0→1</span><span style="color:#05FFA1">crossfade 200ms, opacity only</span>
+        <span style="color:#FFFB96">2 · Append arc</span><span style="color:rgba(244,240,255,.75)">orb clicked / Enter</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.75)">480ms · arc ease²</span><span style="color:rgba(244,240,255,.75)">44px clone follows quadratic path (control point 46px above midpoint) · scale 1→.35 · fades out</span><span style="color:#05FFA1">skipped — tile just fades in</span>
+        <span style="color:#FFFB96">3 · Deck tile in</span><span style="color:rgba(244,240,255,.75)">append / conjure</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.75)">240ms · ease-out</span><span style="color:rgba(244,240,255,.75)">translateY 8→0 · opacity 0→1</span><span style="color:#05FFA1">opacity only</span>
+        <span style="color:#FFFB96">4 · Playhead</span><span style="color:rgba(244,240,255,.75)">playback</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.75)">hard swap per chord (≤1.3 Hz at 160 BPM)</span><span style="color:rgba(244,240,255,.75)">tile border + glow → mint</span><span style="color:#05FFA1">identical (already under 3 Hz)</span>
+        <span style="color:#FFFB96">5 · Ambience</span><span style="color:rgba(244,240,255,.75)">analyser RMS</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.75)">continuous · rAF-throttled · attack ~60ms, release ~300ms</span><span style="color:rgba(244,240,255,.75)">--pulse = min(1, rms×3.2) → sun glow opacity .55+.45p · grid brightness 1+.7p</span><span style="color:#FF9ED2">OFF — --pulse locked to 0</span>
+        <span style="color:#FFFB96">6 · Grid drift</span><span style="color:rgba(244,240,255,.75)">idle (only idle motion)</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.75)">1.7s linear infinite</span><span style="color:rgba(244,240,255,.75)">translateY 0→64px (one cell) on GPU-composited plane</span><span style="color:#FF9ED2">static grid</span>
+        <span style="color:#FFFB96">7 · Scanline</span><span style="color:rgba(244,240,255,.75)">ambient</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.75)">11s linear loop</span><span style="color:rgba(244,240,255,.75)">120px band, opacity .05 — subtle enough to miss</span><span style="color:#FF9ED2">removed</span>
+        <span style="color:#FFFB96">8 · Loading shimmer</span><span style="color:rgba(244,240,255,.75)">samples loading</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.75)">1.3s linear loop</span><span style="color:rgba(244,240,255,.75)">gradient sweep across “tuning the ether…” (background-position)</span><span style="color:#05FFA1">static text</span>
+      </div>
+      <p style="margin:16px 0 0; font-size:11.5px; color:rgba(244,240,255,.6); font-family:'Space Mono', monospace">¹ pop ease: cubic-bezier(.22, 1, .36, 1) · ² arc ease: cubic-bezier(.3, 0, .2, 1) · hover audition dwell: 150ms (orbs and deck tiles, pointer and keyboard focus alike)</p>
+    </section>
+
+    <section aria-label="Live demos" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px">
+      <div style="background:rgba(16,2,40,.55); border:1px solid rgba(1,205,254,.18); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:12px; align-items:center">
+        <div style="font-family:'Space Mono', monospace; font-size:10px; letter-spacing:.18em; color:rgba(1,205,254,.8); align-self:flex-start">DEMO · MATERIALIZE (LOOPED)</div>
+        <div style="height:120px; display:flex; align-items:center; justify-content:center; gap:14px">
+          <div aria-hidden="true" style="width:92px; height:92px; border-radius:50%; background:radial-gradient(circle at 36% 30%, #FFFDE9 0%, #FFFB96 14%, #FF9ED2 38%, #FF71CE 62%, rgba(185,103,255,.55) 84%, rgba(185,103,255,0) 98%); box-shadow:0 0 30px rgba(255,113,206,.55); animation:dvDemoOrb 2.6s cubic-bezier(.22,1,.36,1) infinite; display:flex; align-items:center; justify-content:center"><span style="font-family:'Space Mono', monospace; font-weight:700; font-size:20px; color:#12002E">F</span></div>
+          <div aria-hidden="true" style="width:64px; height:64px; border-radius:50%; background:radial-gradient(circle at 36% 30%, #FFFDE9 0%, #FFFB96 14%, #FF9ED2 38%, #FF71CE 62%, rgba(185,103,255,.55) 84%, rgba(185,103,255,0) 98%); box-shadow:0 0 22px rgba(255,113,206,.45); animation:dvDemoOrb 2.6s cubic-bezier(.22,1,.36,1) .12s infinite; display:flex; align-items:center; justify-content:center"><span style="font-family:'Space Mono', monospace; font-weight:700; font-size:15px; color:#12002E">Dm</span></div>
+        </div>
+        <p style="margin:0; font-size:11.5px; color:rgba(244,240,255,.6); line-height:1.5">Rank 1 lands first; each next rank +60ms. Orbs never bob at idle — the grid is the only idle motion.</p>
+      </div>
+      <div style="background:rgba(16,2,40,.55); border:1px solid rgba(1,205,254,.18); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:12px">
+        <div style="font-family:'Space Mono', monospace; font-size:10px; letter-spacing:.18em; color:rgba(1,205,254,.8)">DEMO · APPEND ARC (LOOPED)</div>
+        <div style="position:relative; height:120px">
+          <div aria-hidden="true" style="position:absolute; left:12px; top:10px; width:44px; height:44px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #FFFB96, #FF71CE 55%, rgba(185,103,255,.4) 80%, transparent); box-shadow:0 0 20px rgba(255,113,206,.7); offset-path:path('M 0 0 Q 110 -34 220 66'); animation:dvDemoArc 1.6s cubic-bezier(.3,0,.2,1) infinite"></div>
+          <div aria-hidden="true" style="position:absolute; right:16px; bottom:8px; min-width:80px; height:58px; border:1.5px dashed rgba(1,205,254,.4); border-radius:10px; display:flex; align-items:center; justify-content:center"><span style="font-family:'Space Mono', monospace; font-size:9px; color:rgba(244,240,255,.45)">▸ deck</span></div>
+        </div>
+        <p style="margin:0; font-size:11.5px; color:rgba(244,240,255,.6); line-height:1.5">The chosen orb’s clone arcs down into the Deck like a captured thought; the real tile pops in beneath it.</p>
+      </div>
+      <div style="background:rgba(16,2,40,.55); border:1px solid rgba(1,205,254,.18); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:12px; align-items:center">
+        <div style="font-family:'Space Mono', monospace; font-size:10px; letter-spacing:.18em; color:rgba(1,205,254,.8); align-self:flex-start">DEMO · ETHER BREATHES (SIMULATED)</div>
+        <div style="position:relative; height:120px; width:100%; overflow:hidden; border-radius:10px; background:linear-gradient(180deg,#12002E,#2A0A4A 70%,#12002E)">
+          <div aria-hidden="true" style="position:absolute; left:50%; top:74%; width:320px; height:200px; transform:translate(-50%,-50%); background:radial-gradient(ellipse at center, rgba(255,113,206,.5), rgba(185,103,255,.15) 50%, transparent 72%); animation:dvDemoBreathe 2.4s ease-in-out infinite"></div>
+          <div aria-hidden="true" style="position:absolute; left:0; right:0; bottom:0; height:44%; background-image:repeating-linear-gradient(90deg, rgba(1,205,254,.35) 0px, rgba(1,205,254,.35) 1.5px, transparent 1.5px, transparent 34px), repeating-linear-gradient(180deg, rgba(1,205,254,.4) 0px, rgba(1,205,254,.4) 1.5px, transparent 1.5px, transparent 15px); animation:dvDemoBreathe 2.4s ease-in-out infinite"></div>
+        </div>
+        <p style="margin:0; font-size:11.5px; color:rgba(244,240,255,.6); line-height:1.5">In product this is driven by the analyser’s smoothed RMS via <span style="font-family:'Space Mono', monospace">--pulse</span>, not a keyframe loop — the site literally pulses with the music.</p>
+      </div>
+    </section>
+
+    <section aria-label="Guards" style="background:rgba(16,2,40,.55); border:1px solid rgba(1,205,254,.18); border-radius:14px; padding:22px 24px">
+      <div style="font-family:'Audiowide', sans-serif; font-size:11px; letter-spacing:.42em; color:rgba(122,222,250,.9)">GUARDS — NON-NEGOTIABLE</div>
+      <ul style="margin:12px 0 0; padding-left:18px; font-size:13px; line-height:1.8; color:rgba(244,240,255,.8)">
+        <li><strong style="color:#FFFB96; font-weight:500">3 Hz floor:</strong> no element may flash faster than 3 Hz under any circumstance. Ambience is smoothed (release ~300ms); playhead tops out at 1.3 Hz; accents are velocity, not strobe.</li>
+        <li><strong style="color:#FFFB96; font-weight:500">Reduced motion is first-class:</strong> honor <span style="font-family:'Space Mono', monospace">prefers-reduced-motion</span> and mirror it with the in-app MOTION toggle. Static sunset, crossfade-only transitions, <span style="font-family:'Space Mono', monospace">--pulse</span> locked to 0.</li>
+        <li><strong style="color:#FFFB96; font-weight:500">GPU discipline:</strong> animate transform and opacity only; the grid is a composited plane (<span style="font-family:'Space Mono', monospace">rotateX</span> wrapper, <span style="font-family:'Space Mono', monospace">translateY</span> child). No layout-affecting animation anywhere.</li>
+        <li><strong style="color:#FFFB96; font-weight:500">Idle is calm:</strong> the grid drifts; nothing else moves until the user or the music does.</li>
+      </ul>
+    </section>
+
+    <footer style="font-family:'Space Mono', monospace; font-size:10.5px; color:rgba(244,240,255,.45); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap">
+      <span>timings + easings also exported as motion tokens — see <a href="Divorawave%20Tokens.dc.html">TOKENS</a></span>
+      <span>back to the <a href="Divorawave%20Prototype.dc.html">PROTOTYPE</a></span>
+    </footer>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

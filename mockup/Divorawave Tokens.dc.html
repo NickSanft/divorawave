@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&amp;family=Space+Grotesk:wght@400;500;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #0B001F; }
+    body { font-family: 'Space Grotesk', system-ui, sans-serif; }
+    a { color: #01CDFE; text-decoration: none; }
+    a:hover { color: #FFFB96; }
+    ::selection { background: #FF71CE; color: #12002E; }
+  </style>
+</helmet>
+<div style="min-height:100vh; background:linear-gradient(180deg,#0B001F 0%,#12002E 45%,#160333 100%); color:#F4F0FF; padding:36px 0 72px">
+  <div style="width:min(1180px, 92vw); margin:0 auto; display:flex; flex-direction:column; gap:26px">
+
+    <header style="display:flex; align-items:baseline; justify-content:space-between; gap:20px; flex-wrap:wrap">
+      <div>
+        <div style="font-family:'Audiowide', sans-serif; font-size:22px; letter-spacing:.32em; background:linear-gradient(180deg,#FFFB96 20%,#FF71CE 55%,#B967FF 100%); -webkit-background-clip:text; background-clip:text; color:transparent">DIVORAWAVE</div>
+        <div style="font-family:'Space Mono', monospace; font-size:11px; letter-spacing:.28em; color:rgba(1,205,254,.8); margin-top:8px">DESIGN TOKENS — PHASE A · binding for Phase B on approval</div>
+      </div>
+      <nav style="display:flex; gap:16px; font-family:'Space Mono', monospace; font-size:10.5px; letter-spacing:.1em">
+        <a href="Divorawave%20Prototype.dc.html">PROTOTYPE</a>
+        <a href="Divorawave%20Style%20Tile.dc.html">STYLE TILE</a>
+        <a href="Divorawave%20Motion%20Spec.dc.html">MOTION SPEC</a>
+      </nav>
+    </header>
+
+    <section aria-label="Color tokens" style="background:rgba(16,2,40,.55); border:1px solid rgba(1,205,254,.18); border-radius:14px; padding:22px 24px">
+      <div style="font-family:'Audiowide', sans-serif; font-size:11px; letter-spacing:.42em; color:rgba(122,222,250,.9)">COLOR — CONTRAST CHECKED AGAINST ACTUAL BACKGROUNDS</div>
+      <div style="margin-top:16px; display:grid; grid-template-columns:34px 190px 130px 1fr 150px; gap:8px 14px; align-items:center; font-size:12.5px">
+        <span aria-hidden="true" style="width:26px; height:26px; border-radius:6px; background:#FF71CE"></span><span style="font-family:'Space Mono', monospace">--vw-pink</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.7)">#FF71CE</span><span style="color:rgba(244,240,255,.75)">accent, orb cores, active states</span><span style="font-family:'Space Mono', monospace; color:#05FFA1">7.4:1 on ink ✓ AA</span>
+        <span aria-hidden="true" style="width:26px; height:26px; border-radius:6px; background:#01CDFE"></span><span style="font-family:'Space Mono', monospace">--vw-cyan</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.7)">#01CDFE</span><span style="color:rgba(244,240,255,.75)">grid lines, secondary accent</span><span style="font-family:'Space Mono', monospace; color:#05FFA1">9.7:1 on ink ✓ AA</span>
+        <span aria-hidden="true" style="width:26px; height:26px; border-radius:6px; background:#05FFA1"></span><span style="font-family:'Space Mono', monospace">--vw-mint</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.7)">#05FFA1</span><span style="color:rgba(244,240,255,.75)">success / confirm, playhead</span><span style="font-family:'Space Mono', monospace; color:#05FFA1">13.8:1 on ink ✓ AA</span>
+        <span aria-hidden="true" style="width:26px; height:26px; border-radius:6px; background:#B967FF"></span><span style="font-family:'Space Mono', monospace">--vw-violet</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.7)">#B967FF</span><span style="color:rgba(244,240,255,.75)">dial, tertiary accent</span><span style="font-family:'Space Mono', monospace; color:#05FFA1">5.6:1 on ink ✓ AA</span>
+        <span aria-hidden="true" style="width:26px; height:26px; border-radius:6px; background:#FFFB96"></span><span style="font-family:'Space Mono', monospace">--vw-cream</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.7)">#FFFB96</span><span style="color:rgba(244,240,255,.75)">focus rings, warm highlights</span><span style="font-family:'Space Mono', monospace; color:#05FFA1">17.0:1 on ink ✓ AAA</span>
+        <span aria-hidden="true" style="width:26px; height:26px; border-radius:6px; background:#F4F0FF"></span><span style="font-family:'Space Mono', monospace">--vw-body</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.7)">#F4F0FF</span><span style="color:rgba(244,240,255,.75)">body text — neon never sets paragraphs</span><span style="font-family:'Space Mono', monospace; color:#05FFA1">16.2:1 on ink ✓ AAA</span>
+        <span aria-hidden="true" style="width:26px; height:26px; border-radius:6px; background:linear-gradient(180deg,#08001A,#12002E,#2A0A4A)"></span><span style="font-family:'Space Mono', monospace">--vw-ink-0/1/2</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.7)">#0B001F·#12002E·#2A0A4A</span><span style="color:rgba(244,240,255,.75)">background field, deepening toward the top</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.5)">—</span>
+        <span aria-hidden="true" style="width:26px; height:26px; border-radius:6px; background:#12002E; display:flex; align-items:center; justify-content:center; color:#FF71CE; font-size:13px">A</span><span style="font-family:'Space Mono', monospace">ink-on-bright rule</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.7)">#12002E</span><span style="color:rgba(244,240,255,.75)">text on orbs / Conjure / sunset band is always ink</span><span style="font-family:'Space Mono', monospace; color:#05FFA1">7.4:1 on pink ✓ AA</span>
+        <span aria-hidden="true" style="width:26px; height:26px; border-radius:6px; background:linear-gradient(180deg,#FFFB96,#FF71CE); display:flex; align-items:center; justify-content:center; color:#01CDFE; font-size:13px">✕</span><span style="font-family:'Space Mono', monospace">forbidden combo</span><span style="font-family:'Space Mono', monospace; color:rgba(244,240,255,.7)">cyan on sunset</span><span style="color:rgba(244,240,255,.75)">pure --vw-cyan on the sunset band</span><span style="font-family:'Space Mono', monospace; color:#FF9ED2">1.6:1 ✗ FAIL — use ink</span>
+      </div>
+      <p style="margin:14px 0 0; font-size:12px; color:rgba(244,240,255,.6)">Derived text tints: <span style="font-family:'Space Mono', monospace">--vw-cyan-text rgba(122,222,250,.9)</span> for cyan type on gradients (holds ≥4.5:1 over ink-2), <span style="font-family:'Space Mono', monospace">--vw-pink-text #FF9ED2</span> for error/hint text (6.2:1 on ink).</p>
+    </section>
+
+    <section aria-label="Token sheet" style="background:rgba(16,2,40,.55); border:1px solid rgba(1,205,254,.18); border-radius:14px; padding:22px 24px">
+      <div style="font-family:'Audiowide', sans-serif; font-size:11px; letter-spacing:.42em; color:rgba(122,222,250,.9)">TOKEN SHEET — COPY INTO :root</div>
+      <pre style="margin:14px 0 0; font-family:'Space Mono', monospace; font-size:12px; line-height:1.75; color:#F4F0FF; background:rgba(8,0,26,.7); border:1px solid rgba(1,205,254,.14); border-radius:10px; padding:18px 20px; overflow-x:auto; user-select:all">:root {
+  /* color */
+  --vw-pink: #FF71CE;        /* accent, orb cores, active states */
+  --vw-cyan: #01CDFE;        /* grid lines, secondary accent */
+  --vw-mint: #05FFA1;        /* success, playhead */
+  --vw-violet: #B967FF;      /* dial, tertiary accent */
+  --vw-cream: #FFFB96;       /* focus rings, warm highlights */
+  --vw-ink-0: #0B001F;       /* page edge / zenith */
+  --vw-ink-1: #12002E;       /* base ink (contrast reference) */
+  --vw-ink-2: #2A0A4A;       /* horizon glow ink */
+  --vw-ink-3: #4A1266;       /* horizon hot band */
+  --vw-body: #F4F0FF;        /* body text */
+  --vw-cyan-text: rgba(122, 222, 250, .9);   /* cyan type on gradients */
+  --vw-pink-text: #FF9ED2;   /* error / hint text */
+
+  /* materials */
+  --vw-glass: rgba(16, 2, 40, .55);
+  --vw-glass-strong: rgba(16, 2, 40, .92);
+  --vw-line: rgba(1, 205, 254, .18);         /* 1px panel borders */
+  --vw-line-strong: rgba(1, 205, 254, .3);
+  --vw-blur-glass: 14px;
+  --vw-blur-chip: 10px;
+  --vw-grain-opacity: .05;                   /* ≤ .04–.05, blend: overlay */
+  --vw-glow-orb: 0 0 34px rgba(255, 113, 206, .55), 0 0 90px rgba(185, 103, 255, .28);
+  --vw-glow-playhead: 0 0 20px rgba(5, 255, 161, .35);
+  --vw-shadow-panel: 0 18px 50px rgba(0, 0, 0, .4);
+
+  /* type */
+  --vw-font-display: 'Audiowide', sans-serif;   /* wordmark + section marks ONLY */
+  --vw-font-ui: 'Space Grotesk', system-ui, sans-serif;
+  --vw-font-data: 'Space Mono', monospace;      /* chords, numerals, BPM */
+  --vw-fs-wordmark: 35px;    /* ls 12px, chrome SVG */
+  --vw-fs-mark: 12px;        /* ls .5em  — THE ETHER / SIDE A */
+  --vw-fs-tile: 19px;        /* deck chord symbol */
+  --vw-fs-ui: 13px;
+  --vw-fs-micro: 10px;       /* ls .28em labels */
+  --vw-orb-name-min: 15px;   /* orb chord symbol scales 15–26px ∝ score */
+  --vw-orb-name-max: 26px;
+
+  /* space (4px base) */
+  --vw-sp-1: 4px;  --vw-sp-2: 8px;  --vw-sp-3: 12px; --vw-sp-4: 16px;
+  --vw-sp-5: 24px; --vw-sp-6: 32px; --vw-sp-7: 48px; --vw-sp-8: 72px;
+
+  /* radii + hit targets */
+  --vw-r-tile: 10px; --vw-r-panel: 14px; --vw-r-pill: 999px;
+  --vw-hit-min: 44px;        /* ≥ 40px per §5.6; we hold 44 */
+  --vw-orb-min: 86px; --vw-orb-max: 172px;   /* diameter ∝ normalized score */
+
+  /* motion (full spec: MOTION SPEC page) */
+  --vw-t-audition: 150ms;    /* hover/focus dwell before audition */
+  --vw-t-orb: 400ms;         /* materialize */
+  --vw-stagger-orb: 60ms;    /* by rank */
+  --vw-t-arc: 480ms;         /* append arc */
+  --vw-t-tile: 240ms;
+  --vw-t-hover: 160ms;
+  --vw-ease-pop: cubic-bezier(.22, 1, .36, 1);
+  --vw-ease-arc: cubic-bezier(.3, 0, .2, 1);
+
+  /* ambience contract */
+  --pulse: 0;                /* 0..1 · analyser RMS, smoothed (attack ~60ms,
+                                release ~300ms) · written by viz/reactive.ts
+                                · MUST stay 0 under reduced motion
+                                · consumers: sun glow opacity calc(.55 + var(--pulse)*.45)
+                                             grid brightness calc(1 + var(--pulse)*.7) */
+}</pre>
+    </section>
+
+    <footer style="font-family:'Space Mono', monospace; font-size:10.5px; color:rgba(244,240,255,.45); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap">
+      <span>acceptance: Nick approves → these tokens bind Phase B (§5.9)</span>
+      <span>next: <a href="Divorawave%20Motion%20Spec.dc.html">MOTION SPEC</a></span>
+    </footer>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

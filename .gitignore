@@ -1,0 +1,18 @@
+# dependencies / build
+node_modules/
+dist/
+
+# corpus cache — the raw Chordonomicon download (92–264 MB) must never be committed
+tools/.cache/
+
+# env / local overrides
+*.local
+.env
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/*
+!.vscode/extensions.json

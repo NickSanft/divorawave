@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&amp;family=Space+Grotesk:wght@400;500;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #0B001F; }
+    body { font-family: 'Space Grotesk', system-ui, sans-serif; }
+    a { color: #01CDFE; text-decoration: none; }
+    a:hover { color: #FFFB96; }
+    ::selection { background: #FF71CE; color: #12002E; }
+    :focus-visible { outline: 2px solid #FFFB96; outline-offset: 3px; border-radius: 6px; }
+    button, input, select { font-family: inherit; }
+    input[type="range"] { accent-color: #01CDFE; cursor: pointer; }
+    select option { background: #1A0538; color: #F4F0FF; }
+    ::placeholder { color: rgba(244, 240, 255, .38); }
+    @keyframes dvGrid { from { transform: translateY(0); } to { transform: translateY(64px); } }
+    @keyframes dvOrbIn { from { transform: scale(.6); filter: blur(8px); opacity: 0; } to { transform: scale(1); filter: blur(0); opacity: 1; } }
+    @keyframes dvTileIn { from { transform: translateY(8px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes dvShimmer { from { background-position: -260px 0; } to { background-position: 260px 0; } }
+    @keyframes dvScan { from { transform: translateY(-140px); } to { transform: translateY(110vh); } }
+    [data-rm="1"] [data-anim] { animation: none !important; transition: none !important; }
+    [data-rm="1"] [data-rm-hide] { display: none !important; }
+    @media (max-width: 980px) { [data-wrap] { flex-wrap: wrap !important; } }
+  </style>
+</helmet>
+<div data-rm="{{rmFlag}}" style="min-height:100vh; display:flex; flex-direction:column; position:relative; color:#F4F0FF; background:#0B001F">
+  <div aria-hidden="true" style="position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; background:linear-gradient(180deg,#08001A 0%,#12002E 30%,#2A0A4A 52%,#4A1266 61%,#12002E 66%,#0B001F 100%)">
+    <div style="position:absolute; inset:0; background-image:radial-gradient(1.5px 1.5px at 12% 16%, rgba(244,240,255,.55), transparent 100%), radial-gradient(1px 1px at 28% 8%, rgba(244,240,255,.4), transparent 100%), radial-gradient(1.5px 1.5px at 44% 22%, rgba(1,205,254,.4), transparent 100%), radial-gradient(1px 1px at 62% 10%, rgba(244,240,255,.45), transparent 100%), radial-gradient(1.5px 1.5px at 78% 18%, rgba(255,113,206,.4), transparent 100%), radial-gradient(1px 1px at 90% 26%, rgba(244,240,255,.4), transparent 100%), radial-gradient(1px 1px at 8% 34%, rgba(244,240,255,.3), transparent 100%), radial-gradient(1.2px 1.2px at 70% 30%, rgba(244,240,255,.3), transparent 100%)"></div>
+    <div style="position:absolute; left:50%; top:61%; width:960px; height:600px; transform:translate(-50%,-56%); background:radial-gradient(ellipse at center, rgba(255,113,206,.34), rgba(185,103,255,.13) 45%, transparent 70%); opacity:calc(.55 + var(--pulse, 0) * .45)"></div>
+    <div style="position:absolute; left:50%; top:61%; transform:translate(-50%,-74%); width:330px; height:330px; border-radius:50%; overflow:hidden; filter:drop-shadow(0 0 42px rgba(255,113,206,.5))">
+      <div style="position:absolute; top:0; left:0; right:0; height:46%; background:linear-gradient(180deg,#FFFDE9 0%,#FFFB96 42%,#FFC9E8 100%)"></div>
+      <div style="position:absolute; bottom:0; left:0; right:0; height:54%; background:linear-gradient(180deg,#FFC9E8 0%,#FF71CE 52%,#B967FF 100%); -webkit-mask-image:repeating-linear-gradient(180deg,#000 0px,#000 13px,transparent 13px,transparent 20px); mask-image:repeating-linear-gradient(180deg,#000 0px,#000 13px,transparent 13px,transparent 20px)"></div>
+    </div>
+    <div style="position:absolute; left:0; right:0; top:61%; height:2px; background:linear-gradient(90deg,transparent 4%, rgba(1,205,254,.55) 50%, transparent 96%); filter:blur(.5px)"></div>
+    <div style="position:absolute; left:0; right:0; top:61%; bottom:0; overflow:hidden; perspective:460px; filter:brightness(calc(1 + var(--pulse, 0) * .7))">
+      <div style="position:absolute; left:-60%; right:-60%; top:-8%; height:230%; transform-origin:50% 0; transform:rotateX(64deg)">
+        <div data-anim style="position:absolute; inset:-64px 0 0 0; background-image:repeating-linear-gradient(90deg, rgba(1,205,254,.30) 0px, rgba(1,205,254,.30) 2px, transparent 2px, transparent 76px), repeating-linear-gradient(180deg, rgba(1,205,254,.34) 0px, rgba(1,205,254,.34) 2px, transparent 2px, transparent 64px); animation:dvGrid 1.7s linear infinite"></div>
+      </div>
+      <div style="position:absolute; inset:0; background:linear-gradient(180deg, #2A0A4A 0%, rgba(42,10,74,0) 36%)"></div>
+    </div>
+    <div style="position:absolute; left:0; right:0; top:55%; height:13%; background:linear-gradient(180deg, transparent, rgba(255,113,206,.10) 45%, rgba(42,10,74,.55) 100%); filter:blur(7px)"></div>
+    <div style="position:absolute; inset:0; opacity:.05; mix-blend-mode:overlay; background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22/></filter><rect width=%22160%22 height=%22160%22 filter=%22url(%23n)%22 opacity=%220.55%22/></svg>')"></div>
+    <div data-anim data-rm-hide style="position:absolute; left:0; right:0; top:0; height:120px; background:linear-gradient(180deg, transparent, rgba(244,240,255,.05), transparent); animation:dvScan 11s linear infinite"></div>
+  </div>
+
+  <header style="position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:24px; padding:20px 34px 4px; flex-wrap:wrap">
+    <h1 style="margin:0; line-height:0">
+      <svg width="420" height="44" viewBox="0 0 560 56" role="img" aria-label="DIVORAWAVE">
+        <defs>
+          <linearGradient id="dvchrome" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FFFFFF"></stop>
+            <stop offset="0.34" stop-color="#FFFB96"></stop>
+            <stop offset="0.49" stop-color="#FFD1EC"></stop>
+            <stop offset="0.51" stop-color="#6E23A8"></stop>
+            <stop offset="0.72" stop-color="#B967FF"></stop>
+            <stop offset="1" stop-color="#FF71CE"></stop>
+          </linearGradient>
+        </defs>
+        <text x="280" y="42" text-anchor="middle" font-family="Audiowide, sans-serif" font-size="35" letter-spacing="12" fill="url(#dvchrome)" stroke="#12002E" stroke-width="1.2" paint-order="stroke" style="filter:drop-shadow(0 0 16px rgba(255,113,206,.5))">DIVORAWAVE</text>
+      </svg>
+    </h1>
+    <div style="display:flex; align-items:center; gap:18px">
+      <div style="text-align:right">
+        <div style="font-size:13px; color:rgba(244,240,255,.72); letter-spacing:.08em">progressions condensed from the ether</div>
+        <sc-if value="{{kat}}" hint-placeholder-val="{{ true }}">
+          <div aria-hidden="true" style="font-size:10px; color:rgba(1,205,254,.5); letter-spacing:.32em; margin-top:3px">コード・エーテル・ウェーブ</div>
+        </sc-if>
+      </div>
+      <button onClick="{{toggleRM}}" aria-pressed="{{rmPressed}}" title="Toggle reduced motion" style="background:rgba(16,2,40,.55); border:1px solid rgba(1,205,254,.25); border-radius:999px; color:rgba(244,240,255,.75); font-family:'Space Mono', monospace; font-size:10px; letter-spacing:.14em; padding:8px 14px; cursor:pointer; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px)" style-hover="border-color:rgba(255,251,150,.6); color:#FFFB96">{{motionLabel}}</button>
+    </div>
+  </header>
+
+  <main style="position:relative; z-index:1; flex:1; display:flex; flex-direction:column; min-height:300px">
+    <div style="display:flex; align-items:center; justify-content:center; gap:14px; margin-top:2px">
+      <span aria-hidden="true" style="color:rgba(1,205,254,.55); font-size:11px">·</span>
+      <span aria-hidden="true" style="color:#FF71CE; font-size:11px; text-shadow:0 0 10px rgba(255,113,206,.8), 0 1px 5px #12002E, 0 0 9px #12002E">✦</span>
+      <h2 style="margin:0; font-family:'Audiowide', sans-serif; font-weight:400; font-size:12px; letter-spacing:.52em; color:rgba(122,222,250,.9); text-shadow:0 0 14px rgba(1,205,254,.45), 0 1px 5px #12002E, 0 0 9px #12002E, 0 0 16px #12002E">THE ETHER</h2>
+      <span aria-hidden="true" style="color:#FF71CE; font-size:11px; text-shadow:0 0 10px rgba(255,113,206,.8), 0 1px 5px #12002E, 0 0 9px #12002E">✦</span>
+      <span aria-hidden="true" style="color:rgba(1,205,254,.55); font-size:11px">·</span>
+    </div>
+    <div role="group" aria-label="The Ether — ranked chord suggestions" style="position:relative; flex:1; min-height:260px">
+      <sc-if value="{{kat}}" hint-placeholder-val="{{ true }}">
+        <div aria-hidden="true" style="position:absolute; right:26px; top:14%; writing-mode:vertical-rl; font-size:10px; letter-spacing:.5em; color:rgba(1,205,254,.28)">エーテルより</div>
+        <div aria-hidden="true" style="position:absolute; left:26px; bottom:12%; writing-mode:vertical-rl; font-size:10px; letter-spacing:.5em; color:rgba(185,103,255,.3)">ドリーム・コード</div>
+      </sc-if>
+      <sc-if value="{{loading}}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute; left:50%; top:46%; transform:translate(-50%,-50%); text-align:center">
+          <div data-anim style="font-family:'Space Mono', monospace; font-size:14px; letter-spacing:.22em; background:linear-gradient(90deg, rgba(244,240,255,.4) 40%, #FFFB96 50%, rgba(244,240,255,.4) 60%); background-size:520px 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:dvShimmer 1.3s linear infinite">tuning the ether…</div>
+        </div>
+      </sc-if>
+      <sc-for list="{{orbs}}" as="o" hint-placeholder-count="0">
+        <div style="position:absolute; left:{{o.x}}%; top:{{o.y}}%; transform:translate(-50%,-50%)">
+          <div data-anim style="animation:dvOrbIn .4s cubic-bezier(.22,1,.36,1) both; animation-delay:{{o.delay}}ms">
+            <button data-orb aria-label="{{o.aria}}" onMouseEnter="{{o.enter}}" onMouseLeave="{{o.leave}}" onFocus="{{o.focus}}" onBlur="{{o.blur}}" onClick="{{o.click}}" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; width:min({{o.size}}px, 25vh); height:min({{o.size}}px, 25vh); border-radius:50%; border:none; cursor:pointer; position:relative; padding:0; background:radial-gradient(circle at 36% 30%, #FFFDE9 0%, #FFFB96 14%, #FF9ED2 38%, #FF71CE 62%, rgba(185,103,255,.55) 84%, rgba(185,103,255,0) 98%); box-shadow:0 0 34px rgba(255,113,206,{{o.glow}}), 0 0 90px rgba(185,103,255,.28); transition:transform .16s ease, box-shadow .16s ease" style-hover="transform:scale(1.07); box-shadow:0 0 46px rgba(255,113,206,.78), 0 0 120px rgba(185,103,255,.42)" style-active="transform:scale(.97)" style-before="content:''; position:absolute; inset:-3px; border-radius:50%; border:1.5px solid rgba(1,205,254,.6); transform:translateX(-1.6px); pointer-events:none" style-after="content:''; position:absolute; inset:-3px; border-radius:50%; border:1.5px solid rgba(255,113,206,.55); transform:translateX(1.6px); pointer-events:none">
+              <span aria-hidden="true" style="font-family:'Space Mono', monospace; font-size:9px; letter-spacing:.2em; color:rgba(18,0,46,.62)">{{o.ord}}</span>
+              <span style="font-family:'Space Mono', monospace; font-weight:700; font-size:{{o.nameFs}}px; color:#12002E; line-height:1.05">{{o.primary}}</span>
+              <span style="font-family:'Space Mono', monospace; font-size:{{o.romFs}}px; color:rgba(18,0,46,.72)">{{o.secondary}}</span>
+            </button>
+          </div>
+        </div>
+      </sc-for>
+      <sc-if value="{{toast}}" hint-placeholder-val="{{ false }}">
+        <div role="status" style="position:absolute; left:50%; bottom:10px; transform:translateX(-50%); background:rgba(16,2,40,.8); border:1px solid rgba(255,251,150,.45); border-radius:999px; padding:9px 18px; font-family:'Space Mono', monospace; font-size:12px; color:#FFFB96; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px)">{{toast}}</div>
+      </sc-if>
+    </div>
+  </main>
+
+  <section aria-label="The Deck — your progression" style="position:relative; z-index:2; width:min(1120px, 94vw); margin:0 auto; background:rgba(16,2,40,.55); border:1px solid rgba(1,205,254,.18); border-radius:14px; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); padding:13px 18px 15px; box-shadow:0 18px 50px rgba(0,0,0,.4)">
+    <div style="display:flex; align-items:center; gap:14px">
+      <h2 style="margin:0; font-family:'Audiowide', sans-serif; font-weight:400; font-size:11px; letter-spacing:.4em; color:#FFFB96">SIDE A</h2>
+      <span aria-hidden="true" style="flex:1; height:1px; background:linear-gradient(90deg, rgba(255,251,150,.4), rgba(1,205,254,.12))"></span>
+      <sc-if value="{{deckHas}}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{removeLast}}" aria-label="Remove last chord" title="Remove last chord" style="background:transparent; border:1px solid rgba(244,240,255,.25); border-radius:999px; color:rgba(244,240,255,.7); width:26px; height:26px; font-size:12px; cursor:pointer; line-height:1" style-hover="border-color:#FF9ED2; color:#FF9ED2">✕</button>
+      </sc-if>
+    </div>
+    <div data-wrap style="display:flex; gap:10px; align-items:stretch; margin-top:12px; overflow-x:auto; padding-bottom:2px">
+      <sc-for list="{{tiles}}" as="t" hint-placeholder-count="0">
+        <button data-anim onClick="{{t.click}}" onMouseEnter="{{t.enter}}" onMouseLeave="{{t.leave}}" aria-label="{{t.aria}}" style="flex:none; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; min-width:86px; height:72px; padding:6px 12px; border-radius:10px; cursor:pointer; background:{{t.bg}}; border:1px solid {{t.bd}}; box-shadow:{{t.shadow}}; animation:dvTileIn .24s ease-out both; transition:border-color .15s ease" style-hover="border-color:rgba(1,205,254,.6)">
+          <span style="font-family:'Space Mono', monospace; font-weight:700; font-size:19px; color:#F4F0FF; line-height:1">{{t.primary}}</span>
+          <span style="font-family:'Space Mono', monospace; font-size:11px; color:rgba(122,222,250,.85)">{{t.secondary}}</span>
+        </button>
+      </sc-for>
+      <div data-deck-end style="flex:none; min-width:216px; border:1.5px dashed rgba(1,205,254,.3); border-radius:10px; display:flex; flex-direction:column; justify-content:center; gap:3px; padding:8px 14px; position:relative">
+        <sc-if value="{{chipsHas}}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute; bottom:calc(100% + 10px); left:0; display:flex; gap:6px; flex-wrap:wrap; background:rgba(16,2,40,.92); border:1px solid rgba(1,205,254,.3); border-radius:10px; padding:8px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); z-index:6; max-width:360px; box-shadow:0 10px 30px rgba(0,0,0,.5)">
+            <sc-for list="{{chipList}}" as="c" hint-placeholder-count="0">
+              <button onClick="{{c.click}}" style="background:rgba(185,103,255,.14); border:1px solid rgba(185,103,255,.4); border-radius:999px; color:#F4F0FF; font-family:'Space Mono', monospace; font-size:12px; padding:4px 11px; cursor:pointer" style-hover="border-color:#FF71CE; background:rgba(255,113,206,.18)">{{c.nm}}</button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <input data-chordinput aria-label="{{inputAria}}" placeholder="{{inputPh}}" value="{{input}}" onInput="{{onInput}}" onKeyDown="{{onInputKey}}" disabled="{{uiDisabled}}" autocomplete="off" spellcheck="false" style="background:transparent; border:none; outline:none; color:#F4F0FF; font-family:'Space Mono', monospace; font-size:15px; width:100%; padding:0">
+        <span aria-hidden="true" style="font-family:'Space Mono', monospace; font-size:10px; color:rgba(244,240,255,.4); letter-spacing:.06em">▸ awaiting next chord…</span>
+      </div>
+    </div>
+    <sc-if value="{{err}}" hint-placeholder-val="{{ false }}">
+      <div role="status" style="margin-top:8px; font-size:12px; color:#FF9ED2; font-family:'Space Mono', monospace">{{err}}</div>
+    </sc-if>
+    <sc-if value="{{deckEmpty}}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:8px; font-size:12px; color:rgba(244,240,255,.5)">the deck is empty — press Conjure, or type the chords you already have</div>
+    </sc-if>
+  </section>
+
+  <section aria-label="Controls" data-wrap style="position:relative; z-index:2; width:min(1120px, 94vw); margin:12px auto 10px; display:flex; align-items:center; gap:20px; background:rgba(16,2,40,.55); border:1px solid rgba(1,205,254,.18); border-radius:14px; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); padding:12px 20px; box-shadow:0 18px 50px rgba(0,0,0,.4); opacity:{{controlsOp}}">
+    <div style="display:flex; flex-direction:column; gap:6px">
+      <span style="font-size:9px; letter-spacing:.3em; color:rgba(244,240,255,.5); font-family:'Space Mono', monospace">KEY</span>
+      <div style="display:flex; gap:6px">
+        <select value="{{root}}" onChange="{{onRoot}}" disabled="{{uiDisabled}}" aria-label="Key root" style="background:rgba(16,2,40,.6); border:1px solid rgba(1,205,254,.25); border-radius:8px; color:#F4F0FF; font-family:'Space Mono', monospace; font-size:12.5px; padding:7px 6px; cursor:pointer">
+          <option value="C">C</option><option value="C♯">C♯</option><option value="D">D</option><option value="E♭">E♭</option><option value="E">E</option><option value="F">F</option><option value="F♯">F♯</option><option value="G">G</option><option value="A♭">A♭</option><option value="A">A</option><option value="B♭">B♭</option><option value="B">B</option>
+        </select>
+        <button onClick="{{setMinor}}" disabled="{{uiDisabled}}" style="padding:7px 11px; border-radius:8px; font-size:11px; letter-spacing:.08em; cursor:pointer; font-family:'Space Mono', monospace; background:{{minBg}}; border:1px solid {{minBd}}; color:{{minCol}}">MINOR</button>
+        <button onClick="{{setMajor}}" disabled="{{uiDisabled}}" style="padding:7px 11px; border-radius:8px; font-size:11px; letter-spacing:.08em; cursor:pointer; font-family:'Space Mono', monospace; background:{{majBg}}; border:1px solid {{majBd}}; color:{{majCol}}">MAJOR</button>
+      </div>
+    </div>
+    <span aria-hidden="true" style="width:1px; align-self:stretch; background:rgba(1,205,254,.14)"></span>
+    <div style="display:flex; flex-direction:column; gap:6px">
+      <span style="font-size:9px; letter-spacing:.3em; color:rgba(244,240,255,.5); font-family:'Space Mono', monospace">NOTATION</span>
+      <div style="display:flex; gap:6px">
+        <button onClick="{{setNames}}" disabled="{{uiDisabled}}" style="padding:7px 11px; border-radius:8px; font-size:11px; letter-spacing:.08em; cursor:pointer; font-family:'Space Mono', monospace; background:{{abcBg}}; border:1px solid {{abcBd}}; color:{{abcCol}}">ABC</button>
+        <button onClick="{{setRoman}}" disabled="{{uiDisabled}}" style="padding:7px 11px; border-radius:8px; font-size:11px; letter-spacing:.08em; cursor:pointer; font-family:'Space Mono', monospace; background:{{rnBg}}; border:1px solid {{rnBd}}; color:{{rnCol}}">I–IV</button>
+      </div>
+    </div>
+    <span aria-hidden="true" style="width:1px; align-self:stretch; background:rgba(1,205,254,.14)"></span>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:2px">
+      <div style="display:flex; align-items:center; gap:8px">
+        <span aria-hidden="true" style="font-size:9px; letter-spacing:.1em; color:rgba(122,222,250,.75); font-family:'Space Mono', monospace; text-align:right; line-height:1.5">FM<br>RADIO</span>
+        <div role="slider" tabindex="0" aria-label="Adventurousness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{dial}}" aria-valuetext="{{dialText}}" onPointerDown="{{dialDown}}" onKeyDown="{{dialKey}}" style="position:relative; width:74px; height:74px; cursor:ns-resize; touch-action:none; border-radius:50%">
+          <svg width="74" height="74" viewBox="0 0 74 74" aria-hidden="true">
+            <defs>
+              <linearGradient id="dvdial" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0" stop-color="#B967FF"></stop>
+                <stop offset="1" stop-color="#FF71CE"></stop>
+              </linearGradient>
+            </defs>
+            <circle cx="37" cy="37" r="22" fill="rgba(16,2,40,.85)" stroke="rgba(1,205,254,.25)" stroke-width="1"></circle>
+            <circle cx="37" cy="37" r="30" fill="none" stroke="rgba(244,240,255,.12)" stroke-width="4" stroke-linecap="round" stroke-dasharray="141.4 188.5" transform="rotate(135 37 37)"></circle>
+            <circle cx="37" cy="37" r="30" fill="none" stroke="url(#dvdial)" stroke-width="4" stroke-linecap="round" stroke-dasharray="{{dialArc}} 188.5" transform="rotate(135 37 37)"></circle>
+            <g transform="rotate({{dialAngle}} 37 37)">
+              <line x1="37" y1="20" x2="37" y2="12" stroke="#FFFB96" stroke-width="2.5" stroke-linecap="round"></line>
+            </g>
+            <text x="37" y="42" text-anchor="middle" font-family="Space Mono, monospace" font-size="14" fill="#FFFB96">{{dial}}</text>
+          </svg>
+        </div>
+        <span aria-hidden="true" style="font-size:9px; letter-spacing:.1em; color:#FF9ED2; font-family:'Space Mono', monospace; line-height:1.5">DEEP<br>ETHER</span>
+      </div>
+      <span style="font-size:8.5px; letter-spacing:.28em; color:rgba(244,240,255,.5); font-family:'Space Mono', monospace">ADVENTUROUSNESS</span>
+    </div>
+    <span aria-hidden="true" style="width:1px; align-self:stretch; background:rgba(1,205,254,.14)"></span>
+    <div style="display:flex; flex-direction:column; gap:8px">
+      <span style="font-size:9px; letter-spacing:.3em; color:rgba(244,240,255,.5); font-family:'Space Mono', monospace">TEMPO</span>
+      <div style="display:flex; align-items:center; gap:10px">
+        <input type="range" min="60" max="160" step="1" value="{{bpm}}" onInput="{{onTempo}}" disabled="{{uiDisabled}}" aria-label="Tempo" style="width:118px">
+        <span style="font-family:'Space Mono', monospace; font-size:13px; color:#FFFB96; min-width:64px">{{bpm}} BPM</span>
+      </div>
+    </div>
+    <span aria-hidden="true" style="width:1px; align-self:stretch; background:rgba(1,205,254,.14)"></span>
+    <div style="display:flex; flex-direction:column; gap:6px">
+      <span style="font-size:9px; letter-spacing:.3em; color:rgba(244,240,255,.5); font-family:'Space Mono', monospace">STYLE</span>
+      <select value="{{styleSel}}" onChange="{{onStyle}}" disabled="{{uiDisabled}}" aria-label="Performance style" style="background:rgba(16,2,40,.6); border:1px solid rgba(1,205,254,.25); border-radius:8px; color:#F4F0FF; font-family:'Space Mono', monospace; font-size:12.5px; padding:7px 6px; cursor:pointer">
+        <option value="pulse">Pulse ⅛</option>
+        <option value="block">Block</option>
+        <option value="arpup">Arp ↑</option>
+        <option value="arpdown">Arp ↓</option>
+      </select>
+    </div>
+    <span aria-hidden="true" style="flex:1"></span>
+    <div style="display:flex; align-items:center; gap:10px">
+      <button onClick="{{onClear}}" disabled="{{playDisabled}}" style="background:transparent; border:1px solid rgba(244,240,255,.28); border-radius:999px; color:rgba(244,240,255,.8); font-size:12px; letter-spacing:.12em; padding:10px 18px; cursor:pointer" style-hover="border-color:rgba(244,240,255,.6); color:#F4F0FF">CLEAR</button>
+      <button onClick="{{onConjure}}" disabled="{{uiDisabled}}" style="background:linear-gradient(135deg,#FF71CE,#B967FF); color:#12002E; font-weight:700; letter-spacing:.14em; border:none; border-radius:999px; padding:12px 24px; font-size:13px; cursor:pointer; box-shadow:0 0 22px rgba(255,113,206,.35); transition:box-shadow .16s ease, transform .16s ease" style-hover="box-shadow:0 0 34px rgba(255,113,206,.6); transform:translateY(-1px)" style-active="transform:translateY(0)">✦ CONJURE</button>
+      <button onClick="{{onPlayToggle}}" disabled="{{playDisabled}}" style="background:{{playBg}}; border:1.5px solid {{playBorder}}; color:{{playCol}}; font-weight:700; letter-spacing:.14em; border-radius:999px; padding:11px 22px; font-size:13px; cursor:pointer; min-width:104px">{{playLabel}}</button>
+    </div>
+  </section>
+
+  <footer style="position:relative; z-index:2; display:flex; justify-content:space-between; align-items:center; gap:18px; padding:4px 34px 14px; font-family:'Space Mono', monospace; font-size:10.5px; color:rgba(244,240,255,.45); flex-wrap:wrap">
+    <span>{{engineNote}}</span>
+    <span style="display:flex; gap:16px">
+      <a href="Divorawave%20Style%20Tile.dc.html">STYLE TILE</a>
+      <a href="Divorawave%20Tokens.dc.html">TOKENS</a>
+      <a href="Divorawave%20Motion%20Spec.dc.html">MOTION SPEC</a>
+    </span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1440, &quot;height&quot;: 900 },
+  &quot;orbCount&quot;: { &quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 6, &quot;min&quot;: 3, &quot;max&quot;: 8, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;Ether&quot;, &quot;description&quot;: &quot;How many suggestion orbs materialize&quot; },
+  &quot;ambience&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 1, &quot;min&quot;: 0, &quot;max&quot;: 1, &quot;step&quot;: 0.05, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;Ether&quot;, &quot;description&quot;: &quot;Audio-reactive glow intensity (0 = ambience off)&quot; },
+  &quot;katakana&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Texture&quot;, &quot;description&quot;: &quot;Decorative katakana texture (always aria-hidden)&quot; }
+}">
+class Component extends DCLogic {
+  state = {
+    loading: true, ready: false, rm: false, deck: [], sugg: [],
+    root: 'A', mode: 'minor', notation: 'names', dial: 38, bpm: 104,
+    style: 'pulse', playing: false, playIdx: -1, input: '', err: '', toast: '',
+  };
+  componentDidMount() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) this.setState({ rm: true });
+    document.documentElement.style.setProperty('--pulse', '0');
+    Promise.all([import('./engine.js'), import('./piano.js')]).then(([E, P]) => {
+      this.E = E;
+      this.piano = new P.EtherPiano();
+      this.piano.onPulse = v => this._setPulse(v);
+      setTimeout(() => this.setState({ loading: false, ready: true }, () => this._resuggest()), 1300);
+    }).catch(e => { console.error('module load failed', e); this.setState({ loading: false }); });
+    this._gesture = () => { if (this.piano) this.piano.ensure(); if (this.state.toast) this.setState({ toast: '' }); };
+    window.addEventListener('pointerdown', this._gesture);
+    this._keys = e => this._globalKeys(e);
+    window.addEventListener('keydown', this._keys);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('pointerdown', this._gesture);
+    window.removeEventListener('keydown', this._keys);
+    if (this.piano) this.piano.stop();
+  }
+  key() { return this.E.makeKey(this.state.root, this.state.mode); }
+  _setPulse(v) {
+    const amb = this.props.ambience ?? 1;
+    document.documentElement.style.setProperty('--pulse', (this.state.rm ? 0 : v * amb).toFixed(3));
+  }
+  _chain() {
+    const key = this.key(); let prev = null;
+    return this.state.deck.map(ch => { const rc = this.E.chordFrom(ch, key); const v = this.E.voice(rc, prev); prev = v.uppers; return v; });
+  }
+  _resuggest() {
+    if (!this.E) return;
+    const count = Math.max(3, Math.min(8, this.props.orbCount ?? 6));
+    const chain = this._chain();
+    const prevUppers = chain.length ? chain[chain.length - 1].uppers : null;
+    this.setState({ sugg: this.E.suggest(this.state.deck, this.key(), this.state.dial, count, prevUppers) });
+  }
+  _warm() { this.setState({ toast: 'tap anywhere to tune in' }); }
+  _audition(ch) {
+    if (!this.piano || !this.state.ready) return;
+    const chain = this._chain();
+    const prev = chain.length ? chain[chain.length - 1].uppers : null;
+    const v = this.E.voice(this.E.chordFrom(ch, this.key()), prev);
+    if (!this.piano.audition(v.all)) this._warm();
+  }
+  _auditionDeck(i) {
+    if (!this.piano) return;
+    const v = this._chain()[i];
+    if (v && !this.piano.audition(v.all)) this._warm();
+  }
+  _append(ch, ev) {
+    if (this.state.playing) this._stop();
+    if (!this.state.rm && ev && ev.currentTarget) this._arcFx(ev.currentTarget);
+    this._audition(ch);
+    this.setState({ deck: [...this.state.deck, ch], err: '' }, () => this._resuggest());
+  }
+  _arcFx(orbEl) {
+    const slot = document.querySelector('[data-deck-end]');
+    if (!slot || !orbEl.getBoundingClientRect) return;
+    const a = orbEl.getBoundingClientRect(), b = slot.getBoundingClientRect(), size = 44;
+    const d = document.createElement('div');
+    d.style.cssText = 'position:fixed;left:0;top:0;width:' + size + 'px;height:' + size + 'px;border-radius:50%;pointer-events:none;z-index:99;background:radial-gradient(circle at 35% 30%, #FFFB96, #FF71CE 55%, rgba(185,103,255,.4) 80%, transparent);box-shadow:0 0 24px rgba(255,113,206,.7)';
+    document.body.appendChild(d);
+    const x0 = a.left + a.width / 2 - size / 2, y0 = a.top + a.height / 2 - size / 2;
+    const x1 = b.left + b.width / 2 - size / 2, y1 = b.top + b.height / 2 - size / 2;
+    const xm = (x0 + x1) / 2, ym = Math.min(y0, y1) - 46;
+    d.animate([
+      { transform: 'translate(' + x0 + 'px,' + y0 + 'px) scale(1)', opacity: 1 },
+      { transform: 'translate(' + xm + 'px,' + ym + 'px) scale(.75)', opacity: .95, offset: .45 },
+      { transform: 'translate(' + x1 + 'px,' + y1 + 'px) scale(.35)', opacity: .25 },
+    ], { duration: 480, easing: 'cubic-bezier(.3,0,.2,1)' }).onfinish = () => d.remove();
+  }
+  _conjure() {
+    if (!this.E) return;
+    if (this.state.playing) this._stop();
+    const deck = this.E.conjure(this.key(), this.state.dial);
+    this.setState({ deck, err: '' }, () => {
+      this._resuggest();
+      setTimeout(() => this._play(), 460);
+    });
+  }
+  _play() {
+    if (!this.piano || !this.state.deck.length) return;
+    const ok = this.piano.play(this._chain(), {
+      bpm: this.state.bpm, style: this.state.style,
+      onChord: i => this.setState({ playIdx: i }),
+      onEnd: () => this.setState({ playing: false, playIdx: -1 }),
+    });
+    if (!ok) { this._warm(); return; }
+    this.setState({ playing: true, playIdx: -1 });
+  }
+  _stop() { if (this.piano) this.piano.stop(); this.setState({ playing: false, playIdx: -1 }); }
+  _globalKeys(e) {
+    const tag = e.target.tagName || '';
+    if (e.code === 'Space' && !/INPUT|SELECT|TEXTAREA|BUTTON/.test(tag)) {
+      e.preventDefault();
+      if (this.state.playing) this._stop(); else this._play();
+    }
+    if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && !/INPUT|SELECT|TEXTAREA/.test(tag)) {
+      const orbs = [...document.querySelectorAll('[data-orb]')];
+      if (!orbs.length) return;
+      const i = orbs.indexOf(document.activeElement);
+      if (i === -1 && e.target !== document.body && !e.target.hasAttribute('data-orb')) return;
+      e.preventDefault();
+      orbs[(i === -1 ? 0 : i + (e.key === 'ArrowRight' ? 1 : -1) + orbs.length) % orbs.length].focus();
+    }
+  }
+  _setDial(v) {
+    v = Math.round(Math.max(0, Math.min(100, v)));
+    if (v === this.state.dial) return;
+    this.setState({ dial: v });
+    clearTimeout(this._dT);
+    this._dT = setTimeout(() => this._resuggest(), 140);
+  }
+  _parse(txt) {
+    const k = this.key();
+    return this.state.notation === 'names' ? this.E.parseName(txt, k) : this.E.parseRoman(txt, k);
+  }
+  _submitInput() {
+    const txt = this.state.input.trim();
+    if (!txt || !this.E) return;
+    const ch = this._parse(txt);
+    if (!ch) {
+      const hint = this.state.notation === 'names'
+        ? 'Couldn\u2019t read that chord \u2014 try Am, F\u266fm7, or Csus2.'
+        : 'Couldn\u2019t read that numeral \u2014 try i, \u266dVI, or V7.';
+      this.setState({ err: hint });
+      const el = document.querySelector('[data-chordinput]');
+      if (el && !this.state.rm) el.animate(
+        [{ transform: 'translateX(0)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(6px)' }, { transform: 'translateX(-4px)' }, { transform: 'translateX(0)' }],
+        { duration: 280 });
+      return;
+    }
+    this.setState({ input: '' });
+    this._append(ch, null);
+  }
+  renderVals() {
+    const s = this.state, E = this.E;
+    const key = E ? this.key() : null;
+    const kat = this.props.katakana ?? true;
+    const slots = [[50, 36], [30, 30], [70, 32], [17, 56], [83, 58], [38, 70], [62, 72], [50, 14]];
+    const total = s.sugg.length;
+    const orbs = s.sugg.map((ch, i) => {
+      const size = Math.round(86 + ch.rel * 86);
+      const [x, y] = slots[i] || [50, 50];
+      const primary = s.notation === 'names' ? ch.name : ch.roman;
+      const secondary = s.notation === 'names' ? ch.roman : ch.name;
+      return {
+        k: ch.name + '·' + s.deck.length + '·' + s.root + s.mode, size, x, y, primary, secondary,
+        nameFs: Math.round(Math.max(15, Math.min(26, size * .16))),
+        romFs: Math.round(Math.max(10, Math.min(13, size * .10))),
+        ord: String(i + 1).padStart(2, '0'),
+        glow: (.35 + ch.rel * .4).toFixed(2),
+        delay: i * 60,
+        aria: primary + ', suggestion ' + (i + 1) + ' of ' + total,
+        enter: () => { clearTimeout(this._hT); this._hT = setTimeout(() => this._audition(ch), 150); },
+        leave: () => clearTimeout(this._hT),
+        focus: () => { clearTimeout(this._fT); this._fT = setTimeout(() => this._audition(ch), 150); },
+        blur: () => clearTimeout(this._fT),
+        click: e => this._append(ch, e),
+      };
+    });
+    const real = E ? s.deck.map(ch => E.chordFrom(ch, key)) : [];
+    const tiles = real.map((rc, i) => {
+      const on = i === s.playIdx;
+      return {
+        k: i + rc.name,
+        primary: s.notation === 'names' ? rc.name : rc.roman,
+        secondary: s.notation === 'names' ? rc.roman : rc.name,
+        aria: rc.name + ', chord ' + (i + 1) + ' of ' + real.length + ' \u2014 click to audition',
+        bg: on ? 'rgba(5,255,161,.10)' : 'rgba(18,0,46,.5)',
+        bd: on ? 'rgba(5,255,161,.85)' : 'rgba(1,205,254,.22)',
+        shadow: on ? '0 0 20px rgba(5,255,161,.35)' : 'none',
+        click: () => this._auditionDeck(i),
+        enter: () => { clearTimeout(this._hT2); this._hT2 = setTimeout(() => this._auditionDeck(i), 150); },
+        leave: () => clearTimeout(this._hT2),
+      };
+    });
+    const chipList = (E && s.input.trim()) ? E.chips(key, s.notation, s.input).map(nm => ({
+      nm,
+      click: () => { const ch = this._parse(nm); if (ch) { this.setState({ input: '' }); this._append(ch, null); } },
+    })) : [];
+    const seg = on => ({
+      bg: on ? 'rgba(185,103,255,.22)' : 'transparent',
+      bd: on ? 'rgba(185,103,255,.75)' : 'rgba(244,240,255,.2)',
+      col: on ? '#F4F0FF' : 'rgba(244,240,255,.62)',
+    });
+    const mi = seg(s.mode === 'minor'), ma = seg(s.mode === 'major');
+    const ab = seg(s.notation === 'names'), rn = seg(s.notation === 'roman');
+    return {
+      rmFlag: s.rm ? '1' : '0',
+      rmPressed: s.rm ? 'true' : 'false',
+      motionLabel: s.rm ? 'MOTION \u00b7 OFF' : 'MOTION \u2726 ON',
+      toggleRM: () => { const rm = !s.rm; this.setState({ rm }); document.documentElement.style.setProperty('--pulse', '0'); },
+      kat, loading: s.loading, toast: s.toast, err: s.err,
+      orbs, tiles, chipList,
+      chipsHas: chipList.length > 0,
+      deckHas: s.deck.length > 0,
+      deckEmpty: !s.loading && s.deck.length === 0,
+      input: s.input,
+      inputPh: s.notation === 'names' ? 'Am, F\u266fm7, Csus2\u2026' : 'i, \u266dVI, V7\u2026',
+      inputAria: 'Add a chord (' + (s.notation === 'names' ? 'chord names' : 'Roman numerals') + ')',
+      onInput: e => this.setState({ input: e.target.value, err: '' }),
+      onInputKey: e => {
+        if (e.key === 'Enter') { e.preventDefault(); this._submitInput(); }
+        if (e.key === 'Backspace' && !this.state.input && this.state.deck.length) { this.setState({ deck: this.state.deck.slice(0, -1) }, () => this._resuggest()); }
+      },
+      root: s.root,
+      onRoot: e => this.setState({ root: e.target.value }, () => this._resuggest()),
+      setMinor: () => this.setState({ mode: 'minor' }, () => this._resuggest()),
+      setMajor: () => this.setState({ mode: 'major' }, () => this._resuggest()),
+      setNames: () => this.setState({ notation: 'names' }),
+      setRoman: () => this.setState({ notation: 'roman' }),
+      minBg: mi.bg, minBd: mi.bd, minCol: mi.col,
+      majBg: ma.bg, majBd: ma.bd, majCol: ma.col,
+      abcBg: ab.bg, abcBd: ab.bd, abcCol: ab.col,
+      rnBg: rn.bg, rnBd: rn.bd, rnCol: rn.col,
+      dial: s.dial,
+      dialText: s.dial + ' of 100 \u2014 ' + (s.dial < 34 ? 'FM radio' : s.dial < 67 ? 'mid ether' : 'deep ether'),
+      dialArc: (141.4 * s.dial / 100).toFixed(1),
+      dialAngle: Math.round(-135 + 2.7 * s.dial),
+      dialDown: e => {
+        e.preventDefault();
+        const el = e.currentTarget; el.focus();
+        try { el.setPointerCapture(e.pointerId); } catch (_) {}
+        const v0 = this.state.dial, x0 = e.clientX, y0 = e.clientY;
+        const mv = ev => this._setDial(v0 + ((ev.clientX - x0) - (ev.clientY - y0)) * .55);
+        const up = () => { el.removeEventListener('pointermove', mv); el.removeEventListener('pointerup', up); };
+        el.addEventListener('pointermove', mv);
+        el.addEventListener('pointerup', up);
+      },
+      dialKey: e => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { e.preventDefault(); this._setDial(this.state.dial + 5); }
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { e.preventDefault(); this._setDial(this.state.dial - 5); }
+      },
+      bpm: s.bpm,
+      onTempo: e => this.setState({ bpm: +e.target.value }),
+      styleSel: s.style,
+      onStyle: e => this.setState({ style: e.target.value }),
+      onClear: () => { this._stop(); this.setState({ deck: [], err: '' }, () => this._resuggest()); },
+      onConjure: () => this._conjure(),
+      onPlayToggle: () => { if (this.state.playing) this._stop(); else this._play(); },
+      playLabel: s.playing ? '\u25a0 STOP' : '\u25b8 PLAY',
+      playBg: s.playing ? 'rgba(255,251,150,.1)' : 'rgba(5,255,161,.08)',
+      playBorder: s.playing ? 'rgba(255,251,150,.8)' : 'rgba(5,255,161,.8)',
+      playCol: s.playing ? '#FFFB96' : '#05FFA1',
+      playDisabled: s.loading || !s.ready || s.deck.length === 0,
+      uiDisabled: s.loading || !s.ready,
+      controlsOp: s.loading ? '.55' : '1',
+      engineNote: 'engine: rules \u00d7 corpus blend \u00b7 corpus: demo table \u2014 Phase B distills Chordonomicon (tier 1: synthwave)',
+    };
+  }
+}
+</script>
+</body>
+</html>
