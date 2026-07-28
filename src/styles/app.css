@@ -1,0 +1,250 @@
+/* DIVORAWAVE app styles — Phase 1: base + the background scene,
+   ported literally from mockup/Divorawave Prototype.dc.html (the approved four-state page).
+   Values that exist as tokens use var(--vw-*); everything else stays byte-identical. */
+
+/* ---------- base ---------- */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--vw-ink-0);
+}
+
+body {
+  font-family: var(--vw-font-ui);
+  color: var(--vw-body);
+}
+
+a { color: var(--vw-cyan); text-decoration: none; }
+a:hover { color: var(--vw-cream); }
+::selection { background: var(--vw-pink); color: var(--vw-ink-1); }
+:focus-visible { outline: 2px solid var(--vw-cream); outline-offset: 3px; border-radius: 6px; }
+button, input, select { font-family: inherit; }
+::placeholder { color: rgba(244, 240, 255, .38); }
+
+/* ---------- keyframes (motion spec #6, #7, #8) ---------- */
+
+@keyframes dvGrid { from { transform: translateY(0); } to { transform: translateY(64px); } }
+@keyframes dvShimmer { from { background-position: -260px 0; } to { background-position: 260px 0; } }
+@keyframes dvScan { from { transform: translateY(-140px); } to { transform: translateY(110vh); } }
+
+/* ---------- layout root ---------- */
+
+.dv-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  color: var(--vw-body);
+  background: var(--vw-ink-0);
+}
+
+/* ---------- background scene (fixed, aria-hidden, z 0) ---------- */
+
+.dv-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: linear-gradient(180deg, #08001A 0%, #12002E 30%, #2A0A4A 52%, #4A1266 61%, #12002E 66%, #0B001F 100%);
+}
+
+.dv-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 16%, rgba(244, 240, 255, .55), transparent 100%),
+    radial-gradient(1px 1px at 28% 8%, rgba(244, 240, 255, .4), transparent 100%),
+    radial-gradient(1.5px 1.5px at 44% 22%, rgba(1, 205, 254, .4), transparent 100%),
+    radial-gradient(1px 1px at 62% 10%, rgba(244, 240, 255, .45), transparent 100%),
+    radial-gradient(1.5px 1.5px at 78% 18%, rgba(255, 113, 206, .4), transparent 100%),
+    radial-gradient(1px 1px at 90% 26%, rgba(244, 240, 255, .4), transparent 100%),
+    radial-gradient(1px 1px at 8% 34%, rgba(244, 240, 255, .3), transparent 100%),
+    radial-gradient(1.2px 1.2px at 70% 30%, rgba(244, 240, 255, .3), transparent 100%);
+}
+
+/* sun glow — the --pulse ambience consumer (opacity .55 + pulse*.45) */
+.dv-sunglow {
+  position: absolute;
+  left: 50%;
+  top: 61%;
+  width: 960px;
+  height: 600px;
+  transform: translate(-50%, -56%);
+  background: radial-gradient(ellipse at center, rgba(255, 113, 206, .34), rgba(185, 103, 255, .13) 45%, transparent 70%);
+  opacity: calc(.55 + var(--pulse, 0) * .45);
+}
+
+/* banded sun — 13px band / 7px gap mask (PLAN.md §7.8: prototype scene wins) */
+.dv-sun {
+  position: absolute;
+  left: 50%;
+  top: 61%;
+  transform: translate(-50%, -74%);
+  width: 330px;
+  height: 330px;
+  border-radius: 50%;
+  overflow: hidden;
+  filter: drop-shadow(0 0 42px rgba(255, 113, 206, .5));
+}
+
+.dv-sun-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 46%;
+  background: linear-gradient(180deg, #FFFDE9 0%, #FFFB96 42%, #FFC9E8 100%);
+}
+
+.dv-sun-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 54%;
+  background: linear-gradient(180deg, #FFC9E8 0%, #FF71CE 52%, #B967FF 100%);
+  -webkit-mask-image: repeating-linear-gradient(180deg, #000 0px, #000 13px, transparent 13px, transparent 20px);
+  mask-image: repeating-linear-gradient(180deg, #000 0px, #000 13px, transparent 13px, transparent 20px);
+}
+
+.dv-horizon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 61%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 4%, rgba(1, 205, 254, .55) 50%, transparent 96%);
+  filter: blur(.5px);
+}
+
+/* perspective grid — brightness is the second --pulse consumer (1 + pulse*.7) */
+.dv-gridwrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 61%;
+  bottom: 0;
+  overflow: hidden;
+  perspective: 460px;
+  filter: brightness(calc(1 + var(--pulse, 0) * .7));
+}
+
+.dv-gridplane {
+  position: absolute;
+  left: -60%;
+  right: -60%;
+  top: -8%;
+  height: 230%;
+  transform-origin: 50% 0;
+  transform: rotateX(64deg);
+}
+
+/* the only idle motion in the product: one-cell drift, 1.7s linear */
+.dv-grid {
+  position: absolute;
+  inset: -64px 0 0 0;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(1, 205, 254, .30) 0px, rgba(1, 205, 254, .30) 2px, transparent 2px, transparent 76px),
+    repeating-linear-gradient(180deg, rgba(1, 205, 254, .34) 0px, rgba(1, 205, 254, .34) 2px, transparent 2px, transparent 64px);
+  animation: dvGrid 1.7s linear infinite;
+}
+
+.dv-gridfade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #2A0A4A 0%, rgba(42, 10, 74, 0) 36%);
+}
+
+.dv-haze {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 55%;
+  height: 13%;
+  background: linear-gradient(180deg, transparent, rgba(255, 113, 206, .10) 45%, rgba(42, 10, 74, .55) 100%);
+  filter: blur(7px);
+}
+
+/* VHS grain — generated SVG turbulence, overlay blend, token opacity */
+.dv-grain {
+  position: absolute;
+  inset: 0;
+  opacity: var(--vw-grain-opacity);
+  mix-blend-mode: overlay;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22/></filter><rect width=%22160%22 height=%22160%22 filter=%22url(%23n)%22 opacity=%220.55%22/></svg>');
+}
+
+/* scanline sweep — subtle enough to miss; removed under reduced motion */
+.dv-scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 120px;
+  background: linear-gradient(180deg, transparent, rgba(244, 240, 255, .05), transparent);
+  animation: dvScan 11s linear infinite;
+}
+
+/* ---------- header (phase 1 placeholder chrome) ---------- */
+
+.dv-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--vw-sp-5);
+  padding: 20px 34px 4px;
+  flex-wrap: wrap;
+}
+
+.dv-wordmark { margin: 0; line-height: 0; }
+
+.dv-tagline {
+  margin: 0;
+  font-size: var(--vw-fs-ui);
+  color: rgba(244, 240, 255, .72);
+  letter-spacing: .08em;
+  text-align: right;
+}
+
+/* ---------- phase 1 placeholder center ---------- */
+
+.dv-main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.dv-shimmer {
+  margin: 0;
+  font-family: var(--vw-font-data);
+  font-size: 14px;
+  letter-spacing: .22em;
+  background: linear-gradient(90deg, rgba(244, 240, 255, .4) 40%, #FFFB96 50%, rgba(244, 240, 255, .4) 60%);
+  background-size: 520px 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: dvShimmer 1.3s linear infinite;
+}
+
+/* ---------- reduced motion (motion spec RM matrix, phase 1 subset) ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .dv-grid,
+  .dv-shimmer {
+    animation: none; /* static grid; static loading text */
+  }
+
+  .dv-scanline {
+    display: none; /* scanline: removed */
+  }
+}

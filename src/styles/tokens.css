@@ -1,0 +1,69 @@
+/* DIVORAWAVE design tokens — Phase A binding export.
+   Copied VERBATIM from mockup/Divorawave Tokens.dc.html ("TOKEN SHEET — COPY INTO :root").
+   Do not edit without a PLAN.md §7 decision. */
+
+:root {
+  /* color */
+  --vw-pink: #FF71CE;        /* accent, orb cores, active states */
+  --vw-cyan: #01CDFE;        /* grid lines, secondary accent */
+  --vw-mint: #05FFA1;        /* success, playhead */
+  --vw-violet: #B967FF;      /* dial, tertiary accent */
+  --vw-cream: #FFFB96;       /* focus rings, warm highlights */
+  --vw-ink-0: #0B001F;       /* page edge / zenith */
+  --vw-ink-1: #12002E;       /* base ink (contrast reference) */
+  --vw-ink-2: #2A0A4A;       /* horizon glow ink */
+  --vw-ink-3: #4A1266;       /* horizon hot band */
+  --vw-body: #F4F0FF;        /* body text */
+  --vw-cyan-text: rgba(122, 222, 250, .9);   /* cyan type on gradients */
+  --vw-pink-text: #FF9ED2;   /* error / hint text */
+
+  /* materials */
+  --vw-glass: rgba(16, 2, 40, .55);
+  --vw-glass-strong: rgba(16, 2, 40, .92);
+  --vw-line: rgba(1, 205, 254, .18);         /* 1px panel borders */
+  --vw-line-strong: rgba(1, 205, 254, .3);
+  --vw-blur-glass: 14px;
+  --vw-blur-chip: 10px;
+  --vw-grain-opacity: .05;                   /* ≤ .04–.05, blend: overlay */
+  --vw-glow-orb: 0 0 34px rgba(255, 113, 206, .55), 0 0 90px rgba(185, 103, 255, .28);
+  --vw-glow-playhead: 0 0 20px rgba(5, 255, 161, .35);
+  --vw-shadow-panel: 0 18px 50px rgba(0, 0, 0, .4);
+
+  /* type */
+  --vw-font-display: 'Audiowide', sans-serif;   /* wordmark + section marks ONLY */
+  --vw-font-ui: 'Space Grotesk', system-ui, sans-serif;
+  --vw-font-data: 'Space Mono', monospace;      /* chords, numerals, BPM */
+  --vw-fs-wordmark: 35px;    /* ls 12px, chrome SVG */
+  --vw-fs-mark: 12px;        /* ls .5em  — THE ETHER / SIDE A */
+  --vw-fs-tile: 19px;        /* deck chord symbol */
+  --vw-fs-ui: 13px;
+  --vw-fs-micro: 10px;       /* ls .28em labels */
+  --vw-orb-name-min: 15px;   /* orb chord symbol scales 15–26px ∝ score */
+  --vw-orb-name-max: 26px;
+
+  /* space (4px base) */
+  --vw-sp-1: 4px;  --vw-sp-2: 8px;  --vw-sp-3: 12px; --vw-sp-4: 16px;
+  --vw-sp-5: 24px; --vw-sp-6: 32px; --vw-sp-7: 48px; --vw-sp-8: 72px;
+
+  /* radii + hit targets */
+  --vw-r-tile: 10px; --vw-r-panel: 14px; --vw-r-pill: 999px;
+  --vw-hit-min: 44px;        /* ≥ 40px per §5.6; we hold 44 */
+  --vw-orb-min: 86px; --vw-orb-max: 172px;   /* diameter ∝ normalized score */
+
+  /* motion (full spec: MOTION SPEC page) */
+  --vw-t-audition: 150ms;    /* hover/focus dwell before audition */
+  --vw-t-orb: 400ms;         /* materialize */
+  --vw-stagger-orb: 60ms;    /* by rank */
+  --vw-t-arc: 480ms;         /* append arc */
+  --vw-t-tile: 240ms;
+  --vw-t-hover: 160ms;
+  --vw-ease-pop: cubic-bezier(.22, 1, .36, 1);
+  --vw-ease-arc: cubic-bezier(.3, 0, .2, 1);
+
+  /* ambience contract */
+  --pulse: 0;                /* 0..1 · analyser RMS, smoothed (attack ~60ms,
+                                release ~300ms) · written by viz/reactive.ts
+                                · MUST stay 0 under reduced motion
+                                · consumers: sun glow opacity calc(.55 + var(--pulse)*.45)
+                                             grid brightness calc(1 + var(--pulse)*.7) */
+}
