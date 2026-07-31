@@ -1,4 +1,4 @@
-/* DIVORAWAVE app styles — Phase 1: base + the background scene,
+/* DIVORAWAVE app styles — base + background scene + the three bands,
    ported literally from mockup/Divorawave Prototype.dc.html (the approved four-state page).
    Values that exist as tokens use var(--vw-*); everything else stays byte-identical. */
 
@@ -21,13 +21,18 @@ a:hover { color: var(--vw-cream); }
 ::selection { background: var(--vw-pink); color: var(--vw-ink-1); }
 :focus-visible { outline: 2px solid var(--vw-cream); outline-offset: 3px; border-radius: 6px; }
 button, input, select { font-family: inherit; }
+input[type='range'] { accent-color: var(--vw-cyan); cursor: pointer; }
+select option { background: #1A0538; color: var(--vw-body); }
 ::placeholder { color: rgba(244, 240, 255, .38); }
 
-/* ---------- keyframes (motion spec #6, #7, #8) ---------- */
+/* ---------- keyframes ---------- */
 
 @keyframes dvGrid { from { transform: translateY(0); } to { transform: translateY(64px); } }
 @keyframes dvShimmer { from { background-position: -260px 0; } to { background-position: 260px 0; } }
 @keyframes dvScan { from { transform: translateY(-140px); } to { transform: translateY(110vh); } }
+@keyframes dvOrbIn { from { transform: scale(.6); filter: blur(8px); opacity: 0; } to { transform: scale(1); filter: blur(0); opacity: 1; } }
+@keyframes dvTileIn { from { transform: translateY(8px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes dvFade { from { opacity: 0; } to { opacity: 1; } }
 
 /* ---------- layout root ---------- */
 
@@ -188,7 +193,7 @@ button, input, select { font-family: inherit; }
   animation: dvScan 11s linear infinite;
 }
 
-/* ---------- header (phase 1 placeholder chrome) ---------- */
+/* ---------- header ---------- */
 
 .dv-header {
   position: relative;
@@ -203,24 +208,104 @@ button, input, select { font-family: inherit; }
 
 .dv-wordmark { margin: 0; line-height: 0; }
 
+.dv-header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.dv-tagline-block { text-align: right; }
+
 .dv-tagline {
-  margin: 0;
   font-size: var(--vw-fs-ui);
   color: rgba(244, 240, 255, .72);
   letter-spacing: .08em;
-  text-align: right;
 }
 
-/* ---------- phase 1 placeholder center ---------- */
+.dv-kat-line {
+  font-size: 10px;
+  color: rgba(1, 205, 254, .5);
+  letter-spacing: .32em;
+  margin-top: 3px;
+}
+
+/* the MOTION pill — in-app reduced-motion toggle (motion spec guard #2) */
+.dv-pill {
+  background: var(--vw-glass);
+  border: 1px solid rgba(1, 205, 254, .25);
+  border-radius: var(--vw-r-pill);
+  color: rgba(244, 240, 255, .75);
+  font-family: var(--vw-font-data);
+  font-size: 10px;
+  letter-spacing: .14em;
+  padding: 8px 14px;
+  cursor: pointer;
+  backdrop-filter: blur(var(--vw-blur-chip));
+  -webkit-backdrop-filter: blur(var(--vw-blur-chip));
+}
+
+.dv-pill:hover { border-color: rgba(255, 251, 150, .6); color: var(--vw-cream); }
+
+/* ---------- THE ETHER ---------- */
 
 .dv-main {
   position: relative;
   z-index: 1;
   flex: 1;
   display: flex;
+  flex-direction: column;
+  min-height: 300px;
+}
+
+.dv-ether-head-row {
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 300px;
+  gap: 14px;
+  margin-top: 2px;
+}
+
+.dv-head-dot { color: rgba(1, 205, 254, .55); font-size: 11px; }
+
+.dv-head-spark {
+  color: var(--vw-pink);
+  font-size: 11px;
+  text-shadow: 0 0 10px rgba(255, 113, 206, .8), 0 1px 5px #12002E, 0 0 9px #12002E;
+}
+
+/* ink halo — the cyan-on-sunset AA fix (HANDOFF; lives in the prototype, not the tokens) */
+.dv-ether-head {
+  margin: 0;
+  font-family: var(--vw-font-display);
+  font-weight: 400;
+  font-size: var(--vw-fs-mark);
+  letter-spacing: .52em;
+  color: var(--vw-cyan-text);
+  text-shadow: 0 0 14px rgba(1, 205, 254, .45), 0 1px 5px #12002E, 0 0 9px #12002E, 0 0 16px #12002E;
+}
+
+.dv-ether {
+  position: relative;
+  flex: 1;
+  min-height: 260px;
+}
+
+.dv-kat-rail {
+  position: absolute;
+  writing-mode: vertical-rl;
+  font-size: 10px;
+  letter-spacing: .5em;
+}
+
+.dv-kat-right { right: 26px; top: 14%; color: rgba(1, 205, 254, .28); }
+.dv-kat-left { left: 26px; bottom: 12%; color: rgba(185, 103, 255, .3); }
+
+.dv-loading {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 .dv-shimmer {
@@ -236,15 +321,404 @@ button, input, select { font-family: inherit; }
   animation: dvShimmer 1.3s linear infinite;
 }
 
-/* ---------- reduced motion (motion spec RM matrix, phase 1 subset) ---------- */
+.dv-toast {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  background: rgba(16, 2, 40, .8);
+  border: 1px solid rgba(255, 251, 150, .45);
+  border-radius: var(--vw-r-pill);
+  padding: 9px 18px;
+  font-family: var(--vw-font-data);
+  font-size: 12px;
+  color: var(--vw-cream);
+  backdrop-filter: blur(var(--vw-blur-chip));
+  -webkit-backdrop-filter: blur(var(--vw-blur-chip));
+}
 
+/* ---------- orbs ---------- */
+
+.dv-orb-slot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+/* materialize: 400ms pop ease, staggered 60ms by rank (inline animation-delay) */
+.dv-orb-anim { animation: dvOrbIn .4s var(--vw-ease-pop) both; }
+
+.dv-orb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  background: radial-gradient(circle at 36% 30%, #FFFDE9 0%, #FFFB96 14%, #FF9ED2 38%, #FF71CE 62%, rgba(185, 103, 255, .55) 84%, rgba(185, 103, 255, 0) 98%);
+  box-shadow: 0 0 34px rgba(255, 113, 206, var(--orb-glow, .35)), 0 0 90px rgba(185, 103, 255, .28);
+  transition: transform .16s ease, box-shadow .16s ease;
+}
+
+.dv-orb:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 46px rgba(255, 113, 206, .78), 0 0 120px rgba(185, 103, 255, .42);
+}
+
+.dv-orb:active { transform: scale(.97); }
+
+/* chromatic-aberration rim: ±1.6px cyan/pink rings */
+.dv-orb::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(1, 205, 254, .6);
+  transform: translateX(-1.6px);
+  pointer-events: none;
+}
+
+.dv-orb::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 113, 206, .55);
+  transform: translateX(1.6px);
+  pointer-events: none;
+}
+
+/* ink text on cores — never neon-on-neon (tokens contrast table) */
+.dv-orb-ord { font-family: var(--vw-font-data); font-size: 9px; letter-spacing: .2em; color: rgba(18, 0, 46, .62); }
+.dv-orb-name { font-family: var(--vw-font-data); font-weight: 700; color: var(--vw-ink-1); line-height: 1.05; }
+.dv-orb-rom { font-family: var(--vw-font-data); color: rgba(18, 0, 46, .72); }
+
+/* ---------- the Deck (SIDE A) ---------- */
+
+.dv-deck {
+  position: relative;
+  z-index: 2;
+  width: min(1120px, 94vw);
+  margin: 0 auto;
+  background: var(--vw-glass);
+  border: 1px solid var(--vw-line);
+  border-radius: var(--vw-r-panel);
+  backdrop-filter: blur(var(--vw-blur-glass));
+  -webkit-backdrop-filter: blur(var(--vw-blur-glass));
+  padding: 13px 18px 15px;
+  box-shadow: var(--vw-shadow-panel);
+}
+
+.dv-deck-head { display: flex; align-items: center; gap: 14px; }
+
+.dv-side-a {
+  margin: 0;
+  font-family: var(--vw-font-display);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: .4em;
+  color: var(--vw-cream);
+}
+
+.dv-rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 251, 150, .4), rgba(1, 205, 254, .12));
+}
+
+.dv-x {
+  background: transparent;
+  border: 1px solid rgba(244, 240, 255, .25);
+  border-radius: var(--vw-r-pill);
+  color: rgba(244, 240, 255, .7);
+  width: 26px;
+  height: 26px;
+  font-size: 12px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.dv-x:hover { border-color: var(--vw-pink-text); color: var(--vw-pink-text); }
+
+.dv-tiles {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+  margin-top: 12px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.dv-tile {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 86px;
+  height: 72px;
+  padding: 6px 12px;
+  border-radius: var(--vw-r-tile);
+  cursor: pointer;
+  background: rgba(18, 0, 46, .5);
+  border: 1px solid rgba(1, 205, 254, .22);
+  box-shadow: none;
+  animation: dvTileIn .24s ease-out both;
+  transition: border-color .15s ease;
+}
+
+.dv-tile:hover { border-color: rgba(1, 205, 254, .6); }
+
+/* mint playhead (motion spec #4 — hard swap per chord, ≤1.3 Hz at 160 BPM) */
+.dv-tile.is-playhead {
+  background: rgba(5, 255, 161, .10);
+  border-color: rgba(5, 255, 161, .85);
+  box-shadow: var(--vw-glow-playhead);
+}
+
+.dv-tile-name { font-family: var(--vw-font-data); font-weight: 700; font-size: var(--vw-fs-tile); color: var(--vw-body); line-height: 1; }
+.dv-tile-rom { font-family: var(--vw-font-data); font-size: 11px; color: rgba(122, 222, 250, .85); }
+
+.dv-endslot {
+  flex: none;
+  min-width: 216px;
+  border: 1.5px dashed rgba(1, 205, 254, .3);
+  border-radius: var(--vw-r-tile);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  padding: 8px 14px;
+  position: relative;
+}
+
+.dv-chips {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  background: var(--vw-glass-strong);
+  border: 1px solid var(--vw-line-strong);
+  border-radius: var(--vw-r-tile);
+  padding: 8px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 6;
+  max-width: 360px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+}
+
+.dv-chip {
+  background: rgba(185, 103, 255, .14);
+  border: 1px solid rgba(185, 103, 255, .4);
+  border-radius: var(--vw-r-pill);
+  color: var(--vw-body);
+  font-family: var(--vw-font-data);
+  font-size: 12px;
+  padding: 4px 11px;
+  cursor: pointer;
+}
+
+.dv-chip:hover { border-color: var(--vw-pink); background: rgba(255, 113, 206, .18); }
+
+.dv-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--vw-body);
+  font-family: var(--vw-font-data);
+  font-size: 15px;
+  width: 100%;
+  padding: 0;
+}
+
+.dv-hint { font-family: var(--vw-font-data); font-size: 10px; color: rgba(244, 240, 255, .4); letter-spacing: .06em; }
+.dv-err { margin-top: 8px; font-size: 12px; color: var(--vw-pink-text); font-family: var(--vw-font-data); }
+.dv-empty { margin-top: 8px; font-size: 12px; color: rgba(244, 240, 255, .5); }
+
+/* ---------- control bar ---------- */
+
+.dv-controls {
+  position: relative;
+  z-index: 2;
+  width: min(1120px, 94vw);
+  margin: 12px auto 10px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--vw-glass);
+  border: 1px solid var(--vw-line);
+  border-radius: var(--vw-r-panel);
+  backdrop-filter: blur(var(--vw-blur-glass));
+  -webkit-backdrop-filter: blur(var(--vw-blur-glass));
+  padding: 12px 20px;
+  box-shadow: var(--vw-shadow-panel);
+}
+
+.dv-controls :disabled { cursor: not-allowed; }
+
+.dv-ctl-group { display: flex; flex-direction: column; gap: 6px; }
+.dv-ctl-label { font-size: 9px; letter-spacing: .3em; color: rgba(244, 240, 255, .5); font-family: var(--vw-font-data); }
+.dv-ctl-row { display: flex; gap: 6px; }
+.dv-divider { width: 1px; align-self: stretch; background: rgba(1, 205, 254, .14); }
+
+.dv-select {
+  background: rgba(16, 2, 40, .6);
+  border: 1px solid rgba(1, 205, 254, .25);
+  border-radius: 8px;
+  color: var(--vw-body);
+  font-family: var(--vw-font-data);
+  font-size: 12.5px;
+  padding: 7px 6px;
+  cursor: pointer;
+}
+
+.dv-seg {
+  padding: 7px 11px;
+  border-radius: 8px;
+  font-size: 11px;
+  letter-spacing: .08em;
+  cursor: pointer;
+  font-family: var(--vw-font-data);
+  background: transparent;
+  border: 1px solid rgba(244, 240, 255, .2);
+  color: rgba(244, 240, 255, .62);
+}
+
+.dv-seg.is-on {
+  background: rgba(185, 103, 255, .22);
+  border-color: rgba(185, 103, 255, .75);
+  color: var(--vw-body);
+}
+
+.dv-dial-group { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.dv-dial-row { display: flex; align-items: center; gap: 8px; }
+.dv-dial-end { font-size: 9px; letter-spacing: .1em; font-family: var(--vw-font-data); line-height: 1.5; }
+.dv-dial-fm { color: rgba(122, 222, 250, .75); text-align: right; }
+.dv-dial-deep { color: var(--vw-pink-text); }
+
+.dv-dial {
+  position: relative;
+  width: 74px;
+  height: 74px;
+  cursor: ns-resize;
+  touch-action: none;
+  border-radius: 50%;
+}
+
+.dv-dial-caption { font-size: 8.5px; letter-spacing: .28em; color: rgba(244, 240, 255, .5); font-family: var(--vw-font-data); }
+
+.dv-tempo-group { gap: 8px; } /* prototype: TEMPO alone uses 8px, not the shared 6px */
+.dv-tempo-row { gap: 10px; align-items: center; }
+.dv-tempo { width: 118px; }
+.dv-bpm { font-family: var(--vw-font-data); font-size: 13px; color: var(--vw-cream); min-width: 64px; }
+
+.dv-spacer { flex: 1; }
+.dv-actions { display: flex; align-items: center; gap: 10px; }
+
+.dv-btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(244, 240, 255, .28);
+  border-radius: var(--vw-r-pill);
+  color: rgba(244, 240, 255, .8);
+  font-size: 12px;
+  letter-spacing: .12em;
+  padding: 10px 18px;
+  cursor: pointer;
+}
+
+.dv-btn-ghost:hover { border-color: rgba(244, 240, 255, .6); color: var(--vw-body); }
+
+.dv-btn-conjure {
+  background: linear-gradient(135deg, #FF71CE, #B967FF);
+  color: var(--vw-ink-1);
+  font-weight: 700;
+  letter-spacing: .14em;
+  border: none;
+  border-radius: var(--vw-r-pill);
+  padding: 12px 24px;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 0 22px rgba(255, 113, 206, .35);
+  transition: box-shadow .16s ease, transform .16s ease;
+}
+
+.dv-btn-conjure:hover { box-shadow: 0 0 34px rgba(255, 113, 206, .6); transform: translateY(-1px); }
+.dv-btn-conjure:active { transform: translateY(0); }
+
+.dv-btn-play {
+  background: rgba(5, 255, 161, .08);
+  border: 1.5px solid rgba(5, 255, 161, .8);
+  color: var(--vw-mint);
+  font-weight: 700;
+  letter-spacing: .14em;
+  border-radius: var(--vw-r-pill);
+  padding: 11px 22px;
+  font-size: 13px;
+  cursor: pointer;
+  min-width: 104px;
+}
+
+.dv-btn-play.is-stop {
+  background: rgba(255, 251, 150, .1);
+  border-color: rgba(255, 251, 150, .8);
+  color: var(--vw-cream);
+}
+
+/* ---------- footer ---------- */
+
+.dv-footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  padding: 4px 34px 14px;
+  font-family: var(--vw-font-data);
+  font-size: 10.5px;
+  color: rgba(244, 240, 255, .45);
+  flex-wrap: wrap;
+}
+
+/* ---------- narrow viewports (§5.6 — degrade, don't break) ---------- */
+
+@media (max-width: 980px) {
+  [data-wrap] { flex-wrap: wrap !important; }
+  .dv-controls { flex-wrap: wrap; }
+}
+
+/* ---------- reduced motion (motion spec RM matrix) ---------- */
+
+/* the in-app MOTION pill sets data-rm on the root; prefers-reduced-motion is
+   mirrored into the same state at mount, so data-rm is the single authority */
+[data-rm='1'] [data-anim] {
+  animation: none !important;
+  transition: none !important;
+}
+
+[data-rm='1'] [data-rm-hide] { display: none !important; }
+
+/* materialize → crossfade 200ms, opacity only */
+[data-rm='1'] .dv-orb-anim { animation: dvFade .2s ease both; }
+
+/* deck tile in → opacity only (must beat the [data-anim] kill above) */
+[data-rm='1'] .dv-tile { animation: dvFade .24s ease-out both !important; }
+
+/* CSS-level safety net for the pure media query (JS mirrors it into data-rm) */
 @media (prefers-reduced-motion: reduce) {
   .dv-grid,
   .dv-shimmer {
-    animation: none; /* static grid; static loading text */
+    animation: none;
   }
 
   .dv-scanline {
-    display: none; /* scanline: removed */
+    display: none;
   }
 }

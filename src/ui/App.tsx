@@ -1,8 +1,21 @@
-/** Phase 1 placeholder App: the background scene + wordmark, proving tokens, fonts,
- *  and the Pages deploy. The real four-band layout (Ether / Deck / Controls) lands in Phase 4. */
-export function App() {
+/** DIVORAWAVE App shell — background scene, header (chrome wordmark, tagline,
+ *  MOTION pill), the three bands (Ether / Deck / Controls), and the footer.
+ *  Global listeners (Space play toggle, arrow orb-cycling, pointerdown resume)
+ *  live in state.init(); reduced motion is driven by data-rm on this root
+ *  (prefers-reduced-motion OR the pill — brief §5.5, motion spec RM matrix). */
+import { useEffect, useMemo } from 'preact/hooks'
+import { createAppState, type AppState } from './state.ts'
+import { Ether } from './Ether.tsx'
+import { Deck } from './Deck.tsx'
+import { Controls } from './Controls.tsx'
+
+let defaultState: AppState | null = null
+
+export function App({ state }: { state?: AppState } = {}) {
+  const s = useMemo(() => state ?? (defaultState ??= createAppState()), [state])
+  useEffect(() => s.init(), [s])
   return (
-    <div class="dv-root">
+    <div class="dv-root" data-rm={s.rm.value ? '1' : '0'}>
       <div class="dv-scene" aria-hidden="true">
         <div class="dv-stars" />
         <div class="dv-sunglow" />
@@ -13,13 +26,13 @@ export function App() {
         <div class="dv-horizon" />
         <div class="dv-gridwrap">
           <div class="dv-gridplane">
-            <div class="dv-grid" />
+            <div class="dv-grid" data-anim />
           </div>
           <div class="dv-gridfade" />
         </div>
         <div class="dv-haze" />
         <div class="dv-grain" />
-        <div class="dv-scanline" />
+        <div class="dv-scanline" data-anim data-rm-hide />
       </div>
 
       <header class="dv-header">
@@ -52,12 +65,36 @@ export function App() {
             </text>
           </svg>
         </h1>
-        <p class="dv-tagline">progressions condensed from the ether</p>
+        <div class="dv-header-right">
+          <div class="dv-tagline-block">
+            <div class="dv-tagline">progressions condensed from the ether</div>
+            <div aria-hidden="true" class="dv-kat-line">コード・エーテル・ウェーブ</div>
+          </div>
+          <button
+            class="dv-pill"
+            onClick={() => s.toggleRM()}
+            aria-pressed={s.rm.value}
+            title="Toggle reduced motion"
+          >
+            {s.rm.value ? 'MOTION · OFF' : 'MOTION ✦ ON'}
+          </button>
+        </div>
       </header>
 
-      <main class="dv-main">
-        <p class="dv-shimmer">tuning the ether…</p>
-      </main>
+      <Ether state={s} />
+      <Deck state={s} />
+      <Controls state={s} />
+
+      <footer class="dv-footer">
+        <span>{s.engineNote.value}</span>
+        <span class="dv-footer-cite">
+          data:{' '}
+          <a href="https://huggingface.co/datasets/ailsntua/Chordonomicon" target="_blank" rel="noreferrer">
+            Chordonomicon
+          </a>{' '}
+          (CC-BY-NC-4.0, aggregate statistics only)
+        </span>
+      </footer>
     </div>
   )
 }
