@@ -45,16 +45,16 @@ export function Controls({ state: s }: { state: AppState }) {
           >
             {ROOTS.map(r => <option key={r.n} value={r.n}>{r.n}</option>)}
           </select>
-          <button class={`dv-seg${s.mode.value === 'minor' ? ' is-on' : ''}`} disabled={disabled} onClick={() => s.setMode('minor')}>MINOR</button>
-          <button class={`dv-seg${s.mode.value === 'major' ? ' is-on' : ''}`} disabled={disabled} onClick={() => s.setMode('major')}>MAJOR</button>
+          <button class={`dv-seg${s.mode.value === 'minor' ? ' is-on' : ''}`} aria-pressed={s.mode.value === 'minor'} disabled={disabled} onClick={() => s.setMode('minor')}>MINOR</button>
+          <button class={`dv-seg${s.mode.value === 'major' ? ' is-on' : ''}`} aria-pressed={s.mode.value === 'major'} disabled={disabled} onClick={() => s.setMode('major')}>MAJOR</button>
         </div>
       </div>
       <span aria-hidden="true" class="dv-divider" />
       <div class="dv-ctl-group">
         <span class="dv-ctl-label">NOTATION</span>
         <div class="dv-ctl-row">
-          <button class={`dv-seg${s.notation.value === 'names' ? ' is-on' : ''}`} disabled={disabled} onClick={() => s.setNotation('names')}>ABC</button>
-          <button class={`dv-seg${s.notation.value === 'roman' ? ' is-on' : ''}`} disabled={disabled} onClick={() => s.setNotation('roman')}>I–IV</button>
+          <button class={`dv-seg${s.notation.value === 'names' ? ' is-on' : ''}`} aria-pressed={s.notation.value === 'names'} disabled={disabled} onClick={() => s.setNotation('names')}>ABC</button>
+          <button class={`dv-seg${s.notation.value === 'roman' ? ' is-on' : ''}`} aria-pressed={s.notation.value === 'roman'} disabled={disabled} onClick={() => s.setNotation('roman')}>I–IV</button>
         </div>
       </div>
       <span aria-hidden="true" class="dv-divider" />

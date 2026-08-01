@@ -12,7 +12,9 @@ afterEach(cleanup)
 import { App } from './App.tsx'
 import { createAppState, type PianoLike } from './state.ts'
 import { createStats, type TransitionTable } from '../engine/stats.ts'
-import table from '../../public/data/synthwave.transitions.json'
+// UI flow tests run on the frozen demo fixture — deterministic regardless of
+// what the Phase 5 distiller ships in public/data/
+import table from '../test/demo.transitions.json'
 
 function fakePiano(): PianoLike {
   return {
@@ -160,6 +162,20 @@ describe('App (phase 4)', () => {
     })
     const { findByText } = render(<App state={state} />)
     expect(await findByText(/engine: rules only/)).toBeTruthy()
+  })
+
+  it('footer names the corpus from the shipped provenance (demo vs distill)', async () => {
+    const demoState = createAppState({ piano: fakePiano(), stats: createStats(table as TransitionTable) })
+    const demo = render(<App state={demoState} />)
+    expect(await demo.findByText(/corpus: interim demo table/)).toBeTruthy()
+    demo.unmount()
+    const distilled = createStats({
+      ...(table as TransitionTable),
+      provenance: { source: 'ailsntua/Chordonomicon', filter_tier: 1, songs_used: 865 },
+    })
+    const distState = createAppState({ piano: fakePiano(), stats: distilled })
+    const dist = render(<App state={distState} />)
+    expect(await dist.findByText(/corpus: Chordonomicon distill — tier 1, 865 songs/)).toBeTruthy()
   })
 
   it('audio failure keeps the engine alive: controls enabled, Play disabled, quiet note (§7.17)', async () => {

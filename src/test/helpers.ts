@@ -1,6 +1,9 @@
-/** Shared test helpers — seeded RNG and the interim demo-stats table. */
+/** Shared test helpers — seeded RNG, the frozen demo-stats FIXTURE (golden parity
+ *  against mockup/engine.js), and the SHIPPED transitions table (calibration +
+ *  conjure constraints must hold on whatever actually ships). */
 import { createStats, type TransitionTable } from '../engine/stats.ts'
-import table from '../../public/data/synthwave.transitions.json'
+import demoFixture from './demo.transitions.json'
+import shipped from '../../public/data/synthwave.transitions.json'
 
 /** mulberry32 — tiny deterministic PRNG for conjure tests (the injectable rng seam). */
 export function mulberry32(seed: number): () => number {
@@ -14,7 +17,12 @@ export function mulberry32(seed: number): () => number {
   }
 }
 
-export const demoTable = table as TransitionTable
-
-/** Stats built from the committed interim JSON (the demo STATS in shipped-schema form). */
+/** The demo STATS in shipped-schema form — a frozen FIXTURE (src/test/), because
+ *  golden parity is against the demo engine regardless of what ships. */
+export const demoTable = demoFixture as TransitionTable
 export const demoStats = createStats(demoTable)
+
+/** Whatever public/data/synthwave.transitions.json currently ships (the Phase 5
+ *  distill once it lands) — calibration and conjure constraints run on THIS. */
+export const shippedTable = shipped as TransitionTable
+export const shippedStats = createStats(shippedTable)

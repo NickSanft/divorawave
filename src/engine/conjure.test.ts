@@ -4,7 +4,7 @@
 import { describe, expect, it } from 'vitest'
 import { makeKey } from './rules.ts'
 import { conjure } from './conjure.ts'
-import { demoStats, mulberry32 } from '../test/helpers.ts'
+import { shippedStats, mulberry32 } from '../test/helpers.ts'
 
 const RUNS_PER_DIAL = 200
 const DIALS = [0, 38, 70, 100]
@@ -18,7 +18,7 @@ describe('conjure constraints (seeded)', () => {
       let total = 0
       for (const dial of DIALS) {
         for (let seed = 1; seed <= RUNS_PER_DIAL; seed++) {
-          const deck = conjure(demoStats, key, dial, mulberry32(seed * 31 + dial))
+          const deck = conjure(shippedStats, key, dial, mulberry32(seed * 31 + dial))
           total++
           expect([4, 8]).toContain(deck.length)
           if (deck.length === 4) fours++
@@ -52,8 +52,8 @@ describe('conjure constraints (seeded)', () => {
 
   it('is deterministic under a fixed seed (the injectable rng seam)', () => {
     const key = makeKey('A', 'minor')
-    const a = conjure(demoStats, key, 38, mulberry32(7)).map(c => c.roman)
-    const b = conjure(demoStats, key, 38, mulberry32(7)).map(c => c.roman)
+    const a = conjure(shippedStats, key, 38, mulberry32(7)).map(c => c.roman)
+    const b = conjure(shippedStats, key, 38, mulberry32(7)).map(c => c.roman)
     expect(a).toEqual(b)
   })
 })

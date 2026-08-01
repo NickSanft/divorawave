@@ -90,10 +90,12 @@ export function createAppState(deps: AppDeps = {}) {
   const playDisabled = computed(
     () => loading.value || !ready.value || deck.value.length === 0 || audioStatus.value === 'failed',
   )
+  /** shipped-table provenance, set once stats load (drives the footer corpus note) */
+  const corpusNote = signal('')
   const engineNote = computed(() => {
     const statsPart = statsStatus.value === 'rules-only'
       ? 'engine: rules only — the corpus table failed to load'
-      : 'engine: rules × corpus blend · corpus: interim demo table — Phase 5 distills Chordonomicon'
+      : `engine: rules × corpus blend${corpusNote.value}`
     const audioPart = audioStatus.value === 'fallback'
       ? ' · piano: fallback soundfont'
       : audioStatus.value === 'failed'
@@ -311,6 +313,10 @@ export function createAppState(deps: AppDeps = {}) {
         if (disposed) return
         stats = st
         statsStatus.value = st.status
+        const prov = st.provenance as { source?: string; filter_tier?: number; songs_used?: number } | undefined
+        corpusNote.value = prov?.source === 'ailsntua/Chordonomicon'
+          ? ` · corpus: Chordonomicon distill — tier ${prov.filter_tier ?? '?'}, ${prov.songs_used ?? '?'} songs`
+          : ' · corpus: interim demo table'
         audioStatus.value = piano.loadState === 'ready' ? (piano.usingFallback ? 'fallback' : 'ok') : 'failed'
         if (piano.analyser) {
           reactive = createReactive(piano.analyser)

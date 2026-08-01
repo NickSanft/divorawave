@@ -43,22 +43,6 @@ export function Deck({ state: s }: { state: AppState }) {
           </button>
         ))}
         <div data-deck-end class="dv-endslot">
-          {chipList.length > 0 && (
-            <div class="dv-chips">
-              {chipList.map(nm => (
-                <button
-                  key={nm}
-                  class="dv-chip"
-                  onClick={() => {
-                    const ch = s.parse(nm)
-                    if (ch) { s.input.value = ''; s.append(ch, null) }
-                  }}
-                >
-                  {nm}
-                </button>
-              ))}
-            </div>
-          )}
           <input
             data-chordinput
             class="dv-input"
@@ -77,6 +61,25 @@ export function Deck({ state: s }: { state: AppState }) {
           <span aria-hidden="true" class="dv-hint">▸ awaiting next chord…</span>
         </div>
       </div>
+      {chipList.length > 0 && (
+        /* anchored to the deck PANEL, not the endslot: .dv-tiles scrolls
+           (overflow-x:auto forces overflow-y clipping), so a popover inside it
+           can never escape upward — Phase 5 review finding */
+        <div class="dv-chips">
+          {chipList.map(nm => (
+            <button
+              key={nm}
+              class="dv-chip"
+              onClick={() => {
+                const ch = s.parse(nm)
+                if (ch) { s.input.value = ''; s.append(ch, null) }
+              }}
+            >
+              {nm}
+            </button>
+          ))}
+        </div>
+      )}
       {s.err.value && <div role="status" class="dv-err">{s.err.value}</div>}
       {!s.loading.value && s.deck.value.length === 0 && (
         <div class="dv-empty">the deck is empty — press Conjure, or type the chords you already have</div>

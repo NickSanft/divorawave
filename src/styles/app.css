@@ -4,6 +4,10 @@
 
 /* ---------- base ---------- */
 
+/* the mockup's dc-runtime injected this reset globally; without it the deck and
+   controls panels (width: min(1120px, 94vw) + padding) overflow narrow viewports */
+*, *::before, *::after { box-sizing: border-box; }
+
 html,
 body {
   margin: 0;
@@ -207,6 +211,9 @@ select option { background: #1A0538; color: var(--vw-body); }
 }
 
 .dv-wordmark { margin: 0; line-height: 0; }
+
+/* fluid below ~455px so narrow viewports degrade instead of h-scrolling (§5.6) */
+.dv-wordmark svg { width: min(420px, calc(100vw - 68px)); height: auto; }
 
 .dv-header-right {
   display: flex;
@@ -496,10 +503,13 @@ select option { background: #1A0538; color: var(--vw-body); }
   position: relative;
 }
 
+/* anchored to .dv-deck (position:relative), floating above the panel's top edge
+   near the input — NOT inside the .dv-tiles scroll container, whose overflow-x:auto
+   forces overflow-y clipping that would swallow the popover */
 .dv-chips {
   position: absolute;
   bottom: calc(100% + 10px);
-  left: 0;
+  right: 18px;
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
@@ -686,6 +696,21 @@ select option { background: #1A0538; color: var(--vw-body); }
   color: rgba(244, 240, 255, .45);
   flex-wrap: wrap;
 }
+
+/* ---------- hit-target expansion (§5.6 / PLAN 5.2) ---------- */
+
+/* Invisible pseudo-element hit areas — visual rendering unchanged (prototype
+   parity), pointer targets grown toward the 44px token. Expansion is capped
+   where neighbors sit close (segs share a 6px gap; chips wrap in a dense
+   popover) so targets never overlap: those reach ~33–36px, still comfortably
+   over the WCAG 2.5.8 AA 24px floor. The native <select>s stay at their ~31px
+   prototype size (recorded cap, PLAN 5.2): pseudo-elements don't render on
+   replaced elements, and a padding bump would break visual parity. */
+.dv-x, .dv-pill, .dv-seg, .dv-chip { position: relative; }
+.dv-x::before { content: ''; position: absolute; inset: -9px; }
+.dv-pill::before { content: ''; position: absolute; inset: -7px -6px; }
+.dv-seg::before { content: ''; position: absolute; inset: -7px -3px; }
+.dv-chip::before { content: ''; position: absolute; inset: -3px; }
 
 /* ---------- narrow viewports (§5.6 — degrade, don't break) ---------- */
 
