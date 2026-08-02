@@ -23,7 +23,7 @@ Pure HTML/CSS/JS after a Vite build · GitHub Pages · no backend, no accounts, 
 ```bash
 npm install
 npm run dev        # dev server
-npm test           # vitest (90 tests, incl. golden parity vs the Phase A demo engine)
+npm test           # vitest (golden parity vs the Phase A demo engine, calibration, UI smoke, vendoring guards)
 npm run build      # type-check + production build
 ```
 
@@ -54,7 +54,8 @@ The distiller filters by a tiered wave-genre regex (tier 1 alone yields ~980 row
   }
   ```
 
-- Piano: [smplr](https://github.com/danigb/smplr) (SplendidGrandPiano samples via [smpldsnds](https://github.com/smpldsnds)) · Music theory: [tonal](https://github.com/tonaljs/tonal).
+- Piano: [smplr](https://github.com/danigb/smplr) with the [smpldsnds SplendidGrandPiano](https://github.com/smpldsnds/sfzinstruments-splendid-grand-piano) samples, **vendored first-party** into `public/samples/` (both ogg and m4a; re-vendor with `npm run vendor:samples`) · Music theory: [tonal](https://github.com/tonaljs/tonal).
+- Fonts (Audiowide, Space Grotesk, Space Mono — OFL-licensed) are likewise vendored into the bundle (`npm run vendor:fonts`). The deployed site makes **no third-party requests at runtime** on the normal path — the piano's emergency fallback retries a third-party soundfont CDN only if our own origin fails to serve samples. Redistribution details in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 - All visuals are original, generated CSS/SVG — vaporwave the language, not any specific artwork.
 - Built with [Claude Code](https://claude.com/claude-code).
 

@@ -1,0 +1,1822 @@
+{
+ "source": "https://smpldsnds.github.io/sfzinstruments-splendid-grand-piano/samples",
+ "note": "SplendidGrandPiano samples (smpldsnds/sfzinstruments-splendid-grand-piano) vendored first-party per PLAN §7.19; list extracted from the installed smplr LAYERS table.",
+ "generated_at": "2026-08-02",
+ "sampleNames": 226,
+ "formats": [
+  "ogg",
+  "m4a"
+ ],
+ "fileCount": 452,
+ "totalBytes": 43713203,
+ "files": [
+  {
+   "file": "FF A#2.m4a",
+   "bytes": 179140
+  },
+  {
+   "file": "FF A#2.ogg",
+   "bytes": 162376
+  },
+  {
+   "file": "FF A#4.m4a",
+   "bytes": 60050
+  },
+  {
+   "file": "FF A#4.ogg",
+   "bytes": 52734
+  },
+  {
+   "file": "FF A0.m4a",
+   "bytes": 200764
+  },
+  {
+   "file": "FF A0.ogg",
+   "bytes": 149248
+  },
+  {
+   "file": "FF A1.m4a",
+   "bytes": 205845
+  },
+  {
+   "file": "FF A1.ogg",
+   "bytes": 178882
+  },
+  {
+   "file": "FF A2.m4a",
+   "bytes": 143037
+  },
+  {
+   "file": "FF A2.ogg",
+   "bytes": 130092
+  },
+  {
+   "file": "FF A3.m4a",
+   "bytes": 100201
+  },
+  {
+   "file": "FF A3.ogg",
+   "bytes": 99690
+  },
+  {
+   "file": "FF A4.m4a",
+   "bytes": 56311
+  },
+  {
+   "file": "FF A4.ogg",
+   "bytes": 49937
+  },
+  {
+   "file": "FF A5.m4a",
+   "bytes": 29956
+  },
+  {
+   "file": "FF A5.ogg",
+   "bytes": 24399
+  },
+  {
+   "file": "FF B-1.m4a",
+   "bytes": 212199
+  },
+  {
+   "file": "FF B-1.ogg",
+   "bytes": 136322
+  },
+  {
+   "file": "FF B0.m4a",
+   "bytes": 191586
+  },
+  {
+   "file": "FF B0.ogg",
+   "bytes": 152790
+  },
+  {
+   "file": "FF B1.m4a",
+   "bytes": 206936
+  },
+  {
+   "file": "FF B1.ogg",
+   "bytes": 186017
+  },
+  {
+   "file": "FF B2.m4a",
+   "bytes": 133978
+  },
+  {
+   "file": "FF B2.ogg",
+   "bytes": 123350
+  },
+  {
+   "file": "FF B3.m4a",
+   "bytes": 86000
+  },
+  {
+   "file": "FF B3.ogg",
+   "bytes": 86005
+  },
+  {
+   "file": "FF B4.m4a",
+   "bytes": 59616
+  },
+  {
+   "file": "FF B4.ogg",
+   "bytes": 56512
+  },
+  {
+   "file": "FF C#1.m4a",
+   "bytes": 166510
+  },
+  {
+   "file": "FF C#1.ogg",
+   "bytes": 140351
+  },
+  {
+   "file": "FF C#5.m4a",
+   "bytes": 62225
+  },
+  {
+   "file": "FF C#5.ogg",
+   "bytes": 51159
+  },
+  {
+   "file": "FF C2.m4a",
+   "bytes": 191909
+  },
+  {
+   "file": "FF C2.ogg",
+   "bytes": 169281
+  },
+  {
+   "file": "FF C3.m4a",
+   "bytes": 104343
+  },
+  {
+   "file": "FF C3.ogg",
+   "bytes": 99614
+  },
+  {
+   "file": "FF C4.m4a",
+   "bytes": 62220
+  },
+  {
+   "file": "FF C4.ogg",
+   "bytes": 61608
+  },
+  {
+   "file": "FF D#0.m4a",
+   "bytes": 202413
+  },
+  {
+   "file": "FF D#0.ogg",
+   "bytes": 136148
+  },
+  {
+   "file": "FF D1.m4a",
+   "bytes": 206568
+  },
+  {
+   "file": "FF D1.ogg",
+   "bytes": 176629
+  },
+  {
+   "file": "FF D2.m4a",
+   "bytes": 202918
+  },
+  {
+   "file": "FF D2.ogg",
+   "bytes": 182454
+  },
+  {
+   "file": "FF D3.m4a",
+   "bytes": 106889
+  },
+  {
+   "file": "FF D3.ogg",
+   "bytes": 102309
+  },
+  {
+   "file": "FF D4.m4a",
+   "bytes": 90468
+  },
+  {
+   "file": "FF D4.ogg",
+   "bytes": 86103
+  },
+  {
+   "file": "FF D5.m4a",
+   "bytes": 73566
+  },
+  {
+   "file": "FF D5.ogg",
+   "bytes": 60923
+  },
+  {
+   "file": "FF E1.m4a",
+   "bytes": 197607
+  },
+  {
+   "file": "FF E1.ogg",
+   "bytes": 173099
+  },
+  {
+   "file": "FF E2.m4a",
+   "bytes": 195288
+  },
+  {
+   "file": "FF E2.ogg",
+   "bytes": 177038
+  },
+  {
+   "file": "FF E3.m4a",
+   "bytes": 126973
+  },
+  {
+   "file": "FF E3.ogg",
+   "bytes": 120139
+  },
+  {
+   "file": "FF E4.m4a",
+   "bytes": 84905
+  },
+  {
+   "file": "FF E4.ogg",
+   "bytes": 81537
+  },
+  {
+   "file": "FF E5.m4a",
+   "bytes": 49847
+  },
+  {
+   "file": "FF E5.ogg",
+   "bytes": 39835
+  },
+  {
+   "file": "FF F0.m4a",
+   "bytes": 230743
+  },
+  {
+   "file": "FF F0.ogg",
+   "bytes": 160016
+  },
+  {
+   "file": "FF F1.m4a",
+   "bytes": 211938
+  },
+  {
+   "file": "FF F1.ogg",
+   "bytes": 185236
+  },
+  {
+   "file": "FF F2.m4a",
+   "bytes": 142677
+  },
+  {
+   "file": "FF F2.ogg",
+   "bytes": 131206
+  },
+  {
+   "file": "FF F3.m4a",
+   "bytes": 100204
+  },
+  {
+   "file": "FF F3.ogg",
+   "bytes": 96518
+  },
+  {
+   "file": "FF F4.m4a",
+   "bytes": 70164
+  },
+  {
+   "file": "FF F4.ogg",
+   "bytes": 65219
+  },
+  {
+   "file": "FF F5.m4a",
+   "bytes": 41964
+  },
+  {
+   "file": "FF F5.ogg",
+   "bytes": 36685
+  },
+  {
+   "file": "FF G#2.m4a",
+   "bytes": 160011
+  },
+  {
+   "file": "FF G#2.ogg",
+   "bytes": 146657
+  },
+  {
+   "file": "FF G#4.m4a",
+   "bytes": 63479
+  },
+  {
+   "file": "FF G#4.ogg",
+   "bytes": 60071
+  },
+  {
+   "file": "FF G0.m4a",
+   "bytes": 199523
+  },
+  {
+   "file": "FF G0.ogg",
+   "bytes": 138198
+  },
+  {
+   "file": "FF G1.m4a",
+   "bytes": 186620
+  },
+  {
+   "file": "FF G1.ogg",
+   "bytes": 163628
+  },
+  {
+   "file": "FF G2.m4a",
+   "bytes": 136686
+  },
+  {
+   "file": "FF G2.ogg",
+   "bytes": 124709
+  },
+  {
+   "file": "FF G3.m4a",
+   "bytes": 93833
+  },
+  {
+   "file": "FF G3.ogg",
+   "bytes": 90172
+  },
+  {
+   "file": "FF G4.m4a",
+   "bytes": 58536
+  },
+  {
+   "file": "FF G4.ogg",
+   "bytes": 55937
+  },
+  {
+   "file": "FF G5.m4a",
+   "bytes": 40418
+  },
+  {
+   "file": "FF G5.ogg",
+   "bytes": 35397
+  },
+  {
+   "file": "MF A#2.m4a",
+   "bytes": 154309
+  },
+  {
+   "file": "MF A#2.ogg",
+   "bytes": 139341
+  },
+  {
+   "file": "Mf A#4.m4a",
+   "bytes": 87890
+  },
+  {
+   "file": "Mf A#4.ogg",
+   "bytes": 72797
+  },
+  {
+   "file": "Mf A#5.m4a",
+   "bytes": 44943
+  },
+  {
+   "file": "Mf A#5.ogg",
+   "bytes": 34407
+  },
+  {
+   "file": "Mf A#6.m4a",
+   "bytes": 23179
+  },
+  {
+   "file": "Mf A#6.ogg",
+   "bytes": 18730
+  },
+  {
+   "file": "Mf A0.m4a",
+   "bytes": 233168
+  },
+  {
+   "file": "Mf A0.ogg",
+   "bytes": 166178
+  },
+  {
+   "file": "MF A1.m4a",
+   "bytes": 171184
+  },
+  {
+   "file": "MF A1.ogg",
+   "bytes": 150874
+  },
+  {
+   "file": "MF A2.m4a",
+   "bytes": 169265
+  },
+  {
+   "file": "MF A2.ogg",
+   "bytes": 150922
+  },
+  {
+   "file": "MF A3.m4a",
+   "bytes": 107773
+  },
+  {
+   "file": "MF A3.ogg",
+   "bytes": 104578
+  },
+  {
+   "file": "Mf A4.m4a",
+   "bytes": 100898
+  },
+  {
+   "file": "Mf A4.ogg",
+   "bytes": 77451
+  },
+  {
+   "file": "Mf A5.m4a",
+   "bytes": 43884
+  },
+  {
+   "file": "Mf A5.ogg",
+   "bytes": 34554
+  },
+  {
+   "file": "Mf A6.m4a",
+   "bytes": 38527
+  },
+  {
+   "file": "Mf A6.ogg",
+   "bytes": 27714
+  },
+  {
+   "file": "Mf B-1.m4a",
+   "bytes": 197960
+  },
+  {
+   "file": "Mf B-1.ogg",
+   "bytes": 127108
+  },
+  {
+   "file": "Mf B0.m4a",
+   "bytes": 218223
+  },
+  {
+   "file": "Mf B0.ogg",
+   "bytes": 164957
+  },
+  {
+   "file": "MF B1.m4a",
+   "bytes": 176092
+  },
+  {
+   "file": "MF B1.ogg",
+   "bytes": 157928
+  },
+  {
+   "file": "MF B2.m4a",
+   "bytes": 131355
+  },
+  {
+   "file": "MF B2.ogg",
+   "bytes": 119968
+  },
+  {
+   "file": "MF B3.m4a",
+   "bytes": 89665
+  },
+  {
+   "file": "MF B3.ogg",
+   "bytes": 89475
+  },
+  {
+   "file": "Mf B4.m4a",
+   "bytes": 74433
+  },
+  {
+   "file": "Mf B4.ogg",
+   "bytes": 67307
+  },
+  {
+   "file": "Mf B5.m4a",
+   "bytes": 42337
+  },
+  {
+   "file": "Mf B5.ogg",
+   "bytes": 32911
+  },
+  {
+   "file": "Mf B6.m4a",
+   "bytes": 43131
+  },
+  {
+   "file": "Mf B6.ogg",
+   "bytes": 29823
+  },
+  {
+   "file": "MF C#1.m4a",
+   "bytes": 225024
+  },
+  {
+   "file": "MF C#1.ogg",
+   "bytes": 179123
+  },
+  {
+   "file": "Mf C#5.m4a",
+   "bytes": 63731
+  },
+  {
+   "file": "Mf C#5.ogg",
+   "bytes": 51300
+  },
+  {
+   "file": "Mf C#6.m4a",
+   "bytes": 34133
+  },
+  {
+   "file": "Mf C#6.ogg",
+   "bytes": 27328
+  },
+  {
+   "file": "MF C2.m4a",
+   "bytes": 184936
+  },
+  {
+   "file": "MF C2.ogg",
+   "bytes": 161597
+  },
+  {
+   "file": "MF C3.m4a",
+   "bytes": 119106
+  },
+  {
+   "file": "MF C3.ogg",
+   "bytes": 109934
+  },
+  {
+   "file": "MF C4.m4a",
+   "bytes": 70841
+  },
+  {
+   "file": "MF C4.ogg",
+   "bytes": 67477
+  },
+  {
+   "file": "Mf C6.m4a",
+   "bytes": 40069
+  },
+  {
+   "file": "Mf C6.ogg",
+   "bytes": 30574
+  },
+  {
+   "file": "Mf C7.m4a",
+   "bytes": 41609
+  },
+  {
+   "file": "Mf C7.ogg",
+   "bytes": 29489
+  },
+  {
+   "file": "Mf D#0.m4a",
+   "bytes": 199091
+  },
+  {
+   "file": "Mf D#0.ogg",
+   "bytes": 131863
+  },
+  {
+   "file": "Mf D#5.m4a",
+   "bytes": 60300
+  },
+  {
+   "file": "Mf D#5.ogg",
+   "bytes": 46269
+  },
+  {
+   "file": "Mf D#6.m4a",
+   "bytes": 40828
+  },
+  {
+   "file": "Mf D#6.ogg",
+   "bytes": 33926
+  },
+  {
+   "file": "MF D1.m4a",
+   "bytes": 205380
+  },
+  {
+   "file": "MF D1.ogg",
+   "bytes": 175132
+  },
+  {
+   "file": "MF D2.m4a",
+   "bytes": 166443
+  },
+  {
+   "file": "MF D2.ogg",
+   "bytes": 149569
+  },
+  {
+   "file": "MF D3.m4a",
+   "bytes": 149730
+  },
+  {
+   "file": "MF D3.ogg",
+   "bytes": 139102
+  },
+  {
+   "file": "Mf D4.m4a",
+   "bytes": 88564
+  },
+  {
+   "file": "Mf D4.ogg",
+   "bytes": 82361
+  },
+  {
+   "file": "Mf D5.m4a",
+   "bytes": 62691
+  },
+  {
+   "file": "Mf D5.ogg",
+   "bytes": 52265
+  },
+  {
+   "file": "Mf D6.m4a",
+   "bytes": 35561
+  },
+  {
+   "file": "Mf D6.ogg",
+   "bytes": 30084
+  },
+  {
+   "file": "MF E1.m4a",
+   "bytes": 211182
+  },
+  {
+   "file": "MF E1.ogg",
+   "bytes": 184902
+  },
+  {
+   "file": "MF E2.m4a",
+   "bytes": 168614
+  },
+  {
+   "file": "MF E2.ogg",
+   "bytes": 152939
+  },
+  {
+   "file": "MF E3.m4a",
+   "bytes": 137283
+  },
+  {
+   "file": "MF E3.ogg",
+   "bytes": 127316
+  },
+  {
+   "file": "Mf E4.m4a",
+   "bytes": 88230
+  },
+  {
+   "file": "Mf E4.ogg",
+   "bytes": 79291
+  },
+  {
+   "file": "Mf E5.m4a",
+   "bytes": 70006
+  },
+  {
+   "file": "Mf E5.ogg",
+   "bytes": 54426
+  },
+  {
+   "file": "Mf E6.m4a",
+   "bytes": 43097
+  },
+  {
+   "file": "Mf E6.ogg",
+   "bytes": 33089
+  },
+  {
+   "file": "Mf F#5.m4a",
+   "bytes": 57012
+  },
+  {
+   "file": "Mf F#5.ogg",
+   "bytes": 44108
+  },
+  {
+   "file": "Mf F#6.m4a",
+   "bytes": 39013
+  },
+  {
+   "file": "Mf F#6.ogg",
+   "bytes": 31291
+  },
+  {
+   "file": "Mf F0.m4a",
+   "bytes": 225185
+  },
+  {
+   "file": "Mf F0.ogg",
+   "bytes": 154104
+  },
+  {
+   "file": "MF F1.m4a",
+   "bytes": 207661
+  },
+  {
+   "file": "MF F1.ogg",
+   "bytes": 180670
+  },
+  {
+   "file": "MF F2.m4a",
+   "bytes": 188560
+  },
+  {
+   "file": "MF F2.ogg",
+   "bytes": 167800
+  },
+  {
+   "file": "MF F3.m4a",
+   "bytes": 107752
+  },
+  {
+   "file": "MF F3.ogg",
+   "bytes": 102561
+  },
+  {
+   "file": "Mf F4.m4a",
+   "bytes": 113447
+  },
+  {
+   "file": "Mf F4.ogg",
+   "bytes": 96708
+  },
+  {
+   "file": "Mf F5.m4a",
+   "bytes": 66015
+  },
+  {
+   "file": "Mf F5.ogg",
+   "bytes": 53316
+  },
+  {
+   "file": "Mf F6.m4a",
+   "bytes": 32938
+  },
+  {
+   "file": "Mf F6.ogg",
+   "bytes": 27056
+  },
+  {
+   "file": "MF G#2.m4a",
+   "bytes": 175191
+  },
+  {
+   "file": "MF G#2.ogg",
+   "bytes": 154799
+  },
+  {
+   "file": "Mf G#4.m4a",
+   "bytes": 51811
+  },
+  {
+   "file": "Mf G#4.ogg",
+   "bytes": 48963
+  },
+  {
+   "file": "Mf G#5.m4a",
+   "bytes": 44900
+  },
+  {
+   "file": "Mf G#5.ogg",
+   "bytes": 35074
+  },
+  {
+   "file": "Mf G#6.m4a",
+   "bytes": 41196
+  },
+  {
+   "file": "Mf G#6.ogg",
+   "bytes": 30912
+  },
+  {
+   "file": "Mf G0.m4a",
+   "bytes": 198315
+  },
+  {
+   "file": "Mf G0.ogg",
+   "bytes": 134155
+  },
+  {
+   "file": "MF G1.m4a",
+   "bytes": 213792
+  },
+  {
+   "file": "MF G1.ogg",
+   "bytes": 185785
+  },
+  {
+   "file": "MF G2.m4a",
+   "bytes": 175409
+  },
+  {
+   "file": "MF G2.ogg",
+   "bytes": 156111
+  },
+  {
+   "file": "MF G3.m4a",
+   "bytes": 120547
+  },
+  {
+   "file": "MF G3.ogg",
+   "bytes": 113224
+  },
+  {
+   "file": "Mf G4.m4a",
+   "bytes": 93764
+  },
+  {
+   "file": "Mf G4.ogg",
+   "bytes": 78748
+  },
+  {
+   "file": "Mf G5.m4a",
+   "bytes": 46810
+  },
+  {
+   "file": "Mf G5.ogg",
+   "bytes": 38780
+  },
+  {
+   "file": "Mf G6.m4a",
+   "bytes": 38599
+  },
+  {
+   "file": "Mf G6.ogg",
+   "bytes": 28806
+  },
+  {
+   "file": "Mp A#2.m4a",
+   "bytes": 166064
+  },
+  {
+   "file": "Mp A#2.ogg",
+   "bytes": 147473
+  },
+  {
+   "file": "Mp A#4.m4a",
+   "bytes": 66009
+  },
+  {
+   "file": "Mp A#4.ogg",
+   "bytes": 56910
+  },
+  {
+   "file": "Mp A#5.m4a",
+   "bytes": 32996
+  },
+  {
+   "file": "Mp A#5.ogg",
+   "bytes": 24967
+  },
+  {
+   "file": "Mp A#6.m4a",
+   "bytes": 35905
+  },
+  {
+   "file": "Mp A#6.ogg",
+   "bytes": 23772
+  },
+  {
+   "file": "Mp A0.m4a",
+   "bytes": 197667
+  },
+  {
+   "file": "Mp A0.ogg",
+   "bytes": 144475
+  },
+  {
+   "file": "Mp A1.m4a",
+   "bytes": 194894
+  },
+  {
+   "file": "Mp A1.ogg",
+   "bytes": 170905
+  },
+  {
+   "file": "Mp A2.m4a",
+   "bytes": 167724
+  },
+  {
+   "file": "Mp A2.ogg",
+   "bytes": 148398
+  },
+  {
+   "file": "Mp A3.m4a",
+   "bytes": 103563
+  },
+  {
+   "file": "Mp A3.ogg",
+   "bytes": 94156
+  },
+  {
+   "file": "Mp A4.m4a",
+   "bytes": 70193
+  },
+  {
+   "file": "Mp A4.ogg",
+   "bytes": 57238
+  },
+  {
+   "file": "Mp A5.m4a",
+   "bytes": 39883
+  },
+  {
+   "file": "Mp A5.ogg",
+   "bytes": 29123
+  },
+  {
+   "file": "Mp A6.m4a",
+   "bytes": 39334
+  },
+  {
+   "file": "Mp A6.ogg",
+   "bytes": 25602
+  },
+  {
+   "file": "Mp B-1.m4a",
+   "bytes": 194932
+  },
+  {
+   "file": "Mp B-1.ogg",
+   "bytes": 124681
+  },
+  {
+   "file": "Mp B0.m4a",
+   "bytes": 195255
+  },
+  {
+   "file": "Mp B0.ogg",
+   "bytes": 146877
+  },
+  {
+   "file": "Mp B1.m4a",
+   "bytes": 150139
+  },
+  {
+   "file": "Mp B1.ogg",
+   "bytes": 134236
+  },
+  {
+   "file": "Mp B2.m4a",
+   "bytes": 174738
+  },
+  {
+   "file": "Mp B2.ogg",
+   "bytes": 154900
+  },
+  {
+   "file": "Mp B3.m4a",
+   "bytes": 73383
+  },
+  {
+   "file": "Mp B3.ogg",
+   "bytes": 73470
+  },
+  {
+   "file": "Mp B4.m4a",
+   "bytes": 80913
+  },
+  {
+   "file": "Mp B4.ogg",
+   "bytes": 75987
+  },
+  {
+   "file": "Mp B5.m4a",
+   "bytes": 31804
+  },
+  {
+   "file": "Mp B5.ogg",
+   "bytes": 24318
+  },
+  {
+   "file": "Mp C#1.m4a",
+   "bytes": 180279
+  },
+  {
+   "file": "Mp C#1.ogg",
+   "bytes": 149116
+  },
+  {
+   "file": "Mp C#5.m4a",
+   "bytes": 57139
+  },
+  {
+   "file": "Mp C#5.ogg",
+   "bytes": 50297
+  },
+  {
+   "file": "Mp C#6.m4a",
+   "bytes": 34693
+  },
+  {
+   "file": "Mp C#6.ogg",
+   "bytes": 24551
+  },
+  {
+   "file": "Mp C2.m4a",
+   "bytes": 148633
+  },
+  {
+   "file": "Mp C2.ogg",
+   "bytes": 129698
+  },
+  {
+   "file": "Mp C3.m4a",
+   "bytes": 130734
+  },
+  {
+   "file": "Mp C3.ogg",
+   "bytes": 119368
+  },
+  {
+   "file": "Mp C4.m4a",
+   "bytes": 64165
+  },
+  {
+   "file": "Mp C4.ogg",
+   "bytes": 59770
+  },
+  {
+   "file": "Mp C6.m4a",
+   "bytes": 34185
+  },
+  {
+   "file": "Mp C6.ogg",
+   "bytes": 26094
+  },
+  {
+   "file": "Mp D#0.m4a",
+   "bytes": 210713
+  },
+  {
+   "file": "Mp D#0.ogg",
+   "bytes": 140218
+  },
+  {
+   "file": "Mp D#5.m4a",
+   "bytes": 34729
+  },
+  {
+   "file": "Mp D#5.ogg",
+   "bytes": 31536
+  },
+  {
+   "file": "Mp D#6.m4a",
+   "bytes": 38863
+  },
+  {
+   "file": "Mp D#6.ogg",
+   "bytes": 27144
+  },
+  {
+   "file": "Mp D1.m4a",
+   "bytes": 212714
+  },
+  {
+   "file": "Mp D1.ogg",
+   "bytes": 175712
+  },
+  {
+   "file": "Mp D2.m4a",
+   "bytes": 114044
+  },
+  {
+   "file": "Mp D2.ogg",
+   "bytes": 102475
+  },
+  {
+   "file": "Mp D3.m4a",
+   "bytes": 121465
+  },
+  {
+   "file": "Mp D3.ogg",
+   "bytes": 112236
+  },
+  {
+   "file": "Mp D4.m4a",
+   "bytes": 93533
+  },
+  {
+   "file": "Mp D4.ogg",
+   "bytes": 84570
+  },
+  {
+   "file": "Mp D5.m4a",
+   "bytes": 52124
+  },
+  {
+   "file": "Mp D5.ogg",
+   "bytes": 49752
+  },
+  {
+   "file": "Mp D6.m4a",
+   "bytes": 36228
+  },
+  {
+   "file": "Mp D6.ogg",
+   "bytes": 26336
+  },
+  {
+   "file": "Mp E1.m4a",
+   "bytes": 201055
+  },
+  {
+   "file": "Mp E1.ogg",
+   "bytes": 176846
+  },
+  {
+   "file": "Mp E2.m4a",
+   "bytes": 151294
+  },
+  {
+   "file": "Mp E2.ogg",
+   "bytes": 136565
+  },
+  {
+   "file": "Mp E3.m4a",
+   "bytes": 123105
+  },
+  {
+   "file": "Mp E3.ogg",
+   "bytes": 113124
+  },
+  {
+   "file": "Mp E4.m4a",
+   "bytes": 97280
+  },
+  {
+   "file": "Mp E4.ogg",
+   "bytes": 82639
+  },
+  {
+   "file": "Mp E5.m4a",
+   "bytes": 54018
+  },
+  {
+   "file": "Mp E5.ogg",
+   "bytes": 41246
+  },
+  {
+   "file": "Mp F#5.m4a",
+   "bytes": 59130
+  },
+  {
+   "file": "Mp F#5.ogg",
+   "bytes": 44124
+  },
+  {
+   "file": "Mp F#6.m4a",
+   "bytes": 40036
+  },
+  {
+   "file": "Mp F#6.ogg",
+   "bytes": 27464
+  },
+  {
+   "file": "Mp F0.m4a",
+   "bytes": 216763
+  },
+  {
+   "file": "Mp F0.ogg",
+   "bytes": 144777
+  },
+  {
+   "file": "Mp F1.m4a",
+   "bytes": 195989
+  },
+  {
+   "file": "Mp F1.ogg",
+   "bytes": 171259
+  },
+  {
+   "file": "Mp F2.m4a",
+   "bytes": 171631
+  },
+  {
+   "file": "Mp F2.ogg",
+   "bytes": 152583
+  },
+  {
+   "file": "Mp F3.m4a",
+   "bytes": 110247
+  },
+  {
+   "file": "Mp F3.ogg",
+   "bytes": 101500
+  },
+  {
+   "file": "Mp F4.m4a",
+   "bytes": 95600
+  },
+  {
+   "file": "Mp F4.ogg",
+   "bytes": 88038
+  },
+  {
+   "file": "Mp F5.m4a",
+   "bytes": 56329
+  },
+  {
+   "file": "Mp F5.ogg",
+   "bytes": 44193
+  },
+  {
+   "file": "Mp F6.m4a",
+   "bytes": 35570
+  },
+  {
+   "file": "Mp F6.ogg",
+   "bytes": 25337
+  },
+  {
+   "file": "Mp G#2.m4a",
+   "bytes": 156937
+  },
+  {
+   "file": "Mp G#2.ogg",
+   "bytes": 139670
+  },
+  {
+   "file": "Mp G#4.m4a",
+   "bytes": 87876
+  },
+  {
+   "file": "Mp G#4.ogg",
+   "bytes": 71512
+  },
+  {
+   "file": "Mp G#5.m4a",
+   "bytes": 36683
+  },
+  {
+   "file": "Mp G#5.ogg",
+   "bytes": 28344
+  },
+  {
+   "file": "Mp G#6.m4a",
+   "bytes": 49771
+  },
+  {
+   "file": "Mp G#6.ogg",
+   "bytes": 31254
+  },
+  {
+   "file": "Mp G0.m4a",
+   "bytes": 195302
+  },
+  {
+   "file": "Mp G0.ogg",
+   "bytes": 127076
+  },
+  {
+   "file": "Mp G1.m4a",
+   "bytes": 157312
+  },
+  {
+   "file": "Mp G1.ogg",
+   "bytes": 140249
+  },
+  {
+   "file": "Mp G2.m4a",
+   "bytes": 155169
+  },
+  {
+   "file": "Mp G2.ogg",
+   "bytes": 138034
+  },
+  {
+   "file": "Mp G3.m4a",
+   "bytes": 97582
+  },
+  {
+   "file": "Mp G3.ogg",
+   "bytes": 90321
+  },
+  {
+   "file": "Mp G4.m4a",
+   "bytes": 78856
+  },
+  {
+   "file": "Mp G4.ogg",
+   "bytes": 67450
+  },
+  {
+   "file": "Mp G5.m4a",
+   "bytes": 40333
+  },
+  {
+   "file": "Mp G5.ogg",
+   "bytes": 32870
+  },
+  {
+   "file": "Mp G6.m4a",
+   "bytes": 40810
+  },
+  {
+   "file": "Mp G6.ogg",
+   "bytes": 27881
+  },
+  {
+   "file": "PP A#2.m4a",
+   "bytes": 81049
+  },
+  {
+   "file": "PP A#2.ogg",
+   "bytes": 75261
+  },
+  {
+   "file": "PP A#4.m4a",
+   "bytes": 40734
+  },
+  {
+   "file": "PP A#4.ogg",
+   "bytes": 35536
+  },
+  {
+   "file": "PP A#5.m4a",
+   "bytes": 37871
+  },
+  {
+   "file": "PP A#5.ogg",
+   "bytes": 26557
+  },
+  {
+   "file": "PP A#6.m4a",
+   "bytes": 41750
+  },
+  {
+   "file": "PP A#6.ogg",
+   "bytes": 26890
+  },
+  {
+   "file": "PP A0.m4a",
+   "bytes": 155939
+  },
+  {
+   "file": "PP A0.ogg",
+   "bytes": 112224
+  },
+  {
+   "file": "PP A1.m4a",
+   "bytes": 121615
+  },
+  {
+   "file": "PP A1.ogg",
+   "bytes": 108185
+  },
+  {
+   "file": "PP A2.m4a",
+   "bytes": 109832
+  },
+  {
+   "file": "PP A2.ogg",
+   "bytes": 97977
+  },
+  {
+   "file": "PP A3.m4a",
+   "bytes": 94564
+  },
+  {
+   "file": "PP A3.ogg",
+   "bytes": 83420
+  },
+  {
+   "file": "PP A4.m4a",
+   "bytes": 32910
+  },
+  {
+   "file": "PP A4.ogg",
+   "bytes": 26548
+  },
+  {
+   "file": "PP A5.m4a",
+   "bytes": 47515
+  },
+  {
+   "file": "PP A5.ogg",
+   "bytes": 32495
+  },
+  {
+   "file": "PP A6.m4a",
+   "bytes": 39354
+  },
+  {
+   "file": "PP A6.ogg",
+   "bytes": 25197
+  },
+  {
+   "file": "PP B-1.m4a",
+   "bytes": 195232
+  },
+  {
+   "file": "PP B-1.ogg",
+   "bytes": 123553
+  },
+  {
+   "file": "PP B0.m4a",
+   "bytes": 145824
+  },
+  {
+   "file": "PP B0.ogg",
+   "bytes": 112989
+  },
+  {
+   "file": "PP B1.m4a",
+   "bytes": 123842
+  },
+  {
+   "file": "PP B1.ogg",
+   "bytes": 108015
+  },
+  {
+   "file": "PP B2.m4a",
+   "bytes": 81360
+  },
+  {
+   "file": "PP B2.ogg",
+   "bytes": 74274
+  },
+  {
+   "file": "PP B3.m4a",
+   "bytes": 98188
+  },
+  {
+   "file": "PP B3.ogg",
+   "bytes": 90972
+  },
+  {
+   "file": "PP B4.m4a",
+   "bytes": 41577
+  },
+  {
+   "file": "PP B4.ogg",
+   "bytes": 37234
+  },
+  {
+   "file": "PP B5.m4a",
+   "bytes": 42748
+  },
+  {
+   "file": "PP B5.ogg",
+   "bytes": 30966
+  },
+  {
+   "file": "PP B6.m4a",
+   "bytes": 37461
+  },
+  {
+   "file": "PP B6.ogg",
+   "bytes": 23958
+  },
+  {
+   "file": "PP C#1.m4a",
+   "bytes": 172730
+  },
+  {
+   "file": "PP C#1.ogg",
+   "bytes": 143614
+  },
+  {
+   "file": "PP C#5.m4a",
+   "bytes": 45308
+  },
+  {
+   "file": "PP C#5.ogg",
+   "bytes": 34286
+  },
+  {
+   "file": "PP C#6.m4a",
+   "bytes": 33202
+  },
+  {
+   "file": "PP C#6.ogg",
+   "bytes": 23567
+  },
+  {
+   "file": "PP C2.m4a",
+   "bytes": 120494
+  },
+  {
+   "file": "PP C2.ogg",
+   "bytes": 106698
+  },
+  {
+   "file": "PP C3.m4a",
+   "bytes": 83229
+  },
+  {
+   "file": "PP C3.ogg",
+   "bytes": 74496
+  },
+  {
+   "file": "PP C4.m4a",
+   "bytes": 68116
+  },
+  {
+   "file": "PP C4.ogg",
+   "bytes": 61613
+  },
+  {
+   "file": "PP C6.m4a",
+   "bytes": 41989
+  },
+  {
+   "file": "PP C6.ogg",
+   "bytes": 28582
+  },
+  {
+   "file": "PP C7.m4a",
+   "bytes": 39659
+  },
+  {
+   "file": "PP C7.ogg",
+   "bytes": 24114
+  },
+  {
+   "file": "PP D#0.m4a",
+   "bytes": 207318
+  },
+  {
+   "file": "PP D#0.ogg",
+   "bytes": 137346
+  },
+  {
+   "file": "PP D#5.m4a",
+   "bytes": 36993
+  },
+  {
+   "file": "PP D#5.ogg",
+   "bytes": 30300
+  },
+  {
+   "file": "PP D#6.m4a",
+   "bytes": 42664
+  },
+  {
+   "file": "PP D#6.ogg",
+   "bytes": 28184
+  },
+  {
+   "file": "PP D1.m4a",
+   "bytes": 161348
+  },
+  {
+   "file": "PP D1.ogg",
+   "bytes": 139389
+  },
+  {
+   "file": "PP D2.m4a",
+   "bytes": 98048
+  },
+  {
+   "file": "PP D2.ogg",
+   "bytes": 87382
+  },
+  {
+   "file": "PP D3.m4a",
+   "bytes": 74231
+  },
+  {
+   "file": "PP D3.ogg",
+   "bytes": 67767
+  },
+  {
+   "file": "PP D4.m4a",
+   "bytes": 65977
+  },
+  {
+   "file": "PP D4.ogg",
+   "bytes": 59752
+  },
+  {
+   "file": "PP D5.m4a",
+   "bytes": 34005
+  },
+  {
+   "file": "PP D5.ogg",
+   "bytes": 28767
+  },
+  {
+   "file": "PP D6.m4a",
+   "bytes": 33978
+  },
+  {
+   "file": "PP D6.ogg",
+   "bytes": 24495
+  },
+  {
+   "file": "PP E1.m4a",
+   "bytes": 153116
+  },
+  {
+   "file": "PP E1.ogg",
+   "bytes": 136338
+  },
+  {
+   "file": "PP E2.m4a",
+   "bytes": 98945
+  },
+  {
+   "file": "PP E2.ogg",
+   "bytes": 88277
+  },
+  {
+   "file": "PP E3.m4a",
+   "bytes": 92267
+  },
+  {
+   "file": "PP E3.ogg",
+   "bytes": 83672
+  },
+  {
+   "file": "PP E4.m4a",
+   "bytes": 68848
+  },
+  {
+   "file": "PP E4.ogg",
+   "bytes": 56254
+  },
+  {
+   "file": "PP E6.m4a",
+   "bytes": 38594
+  },
+  {
+   "file": "PP E6.ogg",
+   "bytes": 26336
+  },
+  {
+   "file": "PP F#5.m4a",
+   "bytes": 34376
+  },
+  {
+   "file": "PP F#5.ogg",
+   "bytes": 25713
+  },
+  {
+   "file": "PP F#6.m4a",
+   "bytes": 38135
+  },
+  {
+   "file": "PP F#6.ogg",
+   "bytes": 26894
+  },
+  {
+   "file": "PP F0.m4a",
+   "bytes": 168849
+  },
+  {
+   "file": "PP F0.ogg",
+   "bytes": 111322
+  },
+  {
+   "file": "PP F1.m4a",
+   "bytes": 132821
+  },
+  {
+   "file": "PP F1.ogg",
+   "bytes": 117179
+  },
+  {
+   "file": "PP F2.m4a",
+   "bytes": 100149
+  },
+  {
+   "file": "PP F2.ogg",
+   "bytes": 89829
+  },
+  {
+   "file": "PP F3.m4a",
+   "bytes": 75730
+  },
+  {
+   "file": "PP F3.ogg",
+   "bytes": 70201
+  },
+  {
+   "file": "PP F4.m4a",
+   "bytes": 52448
+  },
+  {
+   "file": "PP F4.ogg",
+   "bytes": 47902
+  },
+  {
+   "file": "PP F5.m4a",
+   "bytes": 35019
+  },
+  {
+   "file": "PP F5.ogg",
+   "bytes": 28294
+  },
+  {
+   "file": "PP F6.m4a",
+   "bytes": 39689
+  },
+  {
+   "file": "PP F6.ogg",
+   "bytes": 27431
+  },
+  {
+   "file": "PP G#2.m4a",
+   "bytes": 101613
+  },
+  {
+   "file": "PP G#2.ogg",
+   "bytes": 90566
+  },
+  {
+   "file": "PP G#4.m4a",
+   "bytes": 64900
+  },
+  {
+   "file": "PP G#4.ogg",
+   "bytes": 52907
+  },
+  {
+   "file": "PP G#5.m4a",
+   "bytes": 34456
+  },
+  {
+   "file": "PP G#5.ogg",
+   "bytes": 25887
+  },
+  {
+   "file": "PP G#6.m4a",
+   "bytes": 47614
+  },
+  {
+   "file": "PP G#6.ogg",
+   "bytes": 29259
+  },
+  {
+   "file": "PP G0.m4a",
+   "bytes": 162521
+  },
+  {
+   "file": "PP G0.ogg",
+   "bytes": 107277
+  },
+  {
+   "file": "PP G1.m4a",
+   "bytes": 103960
+  },
+  {
+   "file": "PP G1.ogg",
+   "bytes": 92507
+  },
+  {
+   "file": "PP G2.m4a",
+   "bytes": 111764
+  },
+  {
+   "file": "PP G2.ogg",
+   "bytes": 99887
+  },
+  {
+   "file": "PP G3.m4a",
+   "bytes": 88792
+  },
+  {
+   "file": "PP G3.ogg",
+   "bytes": 81741
+  },
+  {
+   "file": "PP G4.m4a",
+   "bytes": 61471
+  },
+  {
+   "file": "PP G4.ogg",
+   "bytes": 52981
+  },
+  {
+   "file": "PP G5.m4a",
+   "bytes": 34775
+  },
+  {
+   "file": "PP G5.ogg",
+   "bytes": 27325
+  },
+  {
+   "file": "PP G6.m4a",
+   "bytes": 51311
+  },
+  {
+   "file": "PP G6.ogg",
+   "bytes": 33546
+  }
+ ]
+}

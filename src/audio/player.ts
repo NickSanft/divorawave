@@ -110,6 +110,9 @@ export class EtherPiano {
       const piano = SplendidGrandPiano(ctx, {
         destination: this.out!,
         storage,
+        // §7.19: samples are vendored first-party (public/samples/) — no third-party
+        // CDN at runtime; smplr percent-encodes the '#'/space filenames on fetch
+        baseUrl: `${import.meta.env.BASE_URL}samples/splendid-grand-piano`,
         onLoadProgress: p => this.onLoadProgress?.(p),
       })
       await piano.ready

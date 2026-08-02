@@ -11,7 +11,10 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "distill": "tsx tools/distill.ts"
+    "distill": "tsx tools/distill.ts",
+    "vendor:samples": "tsx tools/vendor-samples.ts",
+    "vendor:fonts": "tsx tools/vendor-fonts.ts",
+    "vendor": "npm run vendor:samples && npm run vendor:fonts"
   },
   "dependencies": {
     "@preact/signals": "^2.10.0",
