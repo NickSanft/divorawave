@@ -16,7 +16,7 @@ Pure HTML/CSS/JS after a Vite build · GitHub Pages · no backend, no accounts, 
 - **Stats layer** (`src/engine/stats.ts` + `public/data/synthwave.transitions.json`) — an order-2 Markov model with order-1/unigram backoff, distilled from the 865 wave-tagged songs in the Chordonomicon corpus. The table only *ranks*; it never proposes a chord the rules layer didn't generate.
 - **The blend** (`src/engine/blend.ts`) — roughly `score = (1−a)·P̂stats + a·spice·novelty` with voice-leading smoothness as the tiebreaker; the dial is `a`, eased and scaled (the exact frozen constants live in `blend.ts`).
 - **Audio** (`src/audio/`) — smplr's SplendidGrandPiano through a generated noise-decay reverb and a subtle stereo chorus, scheduled by a ~25 ms lookahead loop; an analyser's smoothed RMS drives the `--pulse` CSS variable, so the sunset literally breathes with the music (and stays static under reduced motion).
-- **UI** (`src/ui/`) — Preact + signals; every chord is stored dual-natured (absolute spelling *and* key-relative Roman degree), so the notation toggle and key changes are re-renders, never lossy conversions.
+- **UI** (`src/ui/`) — Preact + signals; every chord is stored dual-natured (absolute spelling *and* key-relative Roman degree), so the notation toggle and key changes are re-renders, never lossy conversions. Slash chords work too: type `A/C♯` and the specified bass is voiced under the chord — and transposes with it (`E/G♯` in E minor).
 
 ## Development
 

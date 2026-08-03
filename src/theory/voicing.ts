@@ -1,8 +1,10 @@
 /** DIVORAWAVE theory — voice-leading-aware voicing engine (brief §8.3).
  *
  *  Verbatim port of mockup/engine.js voice(); PLAN.md §5 freezes every constant:
- *  bass = MIDI 36 + rootPc (octave 2, always the root — specified bass is §7.4 backlog);
- *  >3 distinct pitch classes → root dropped from the uppers (the bass covers it);
+ *  bass = MIDI 36 + rootPc (octave 2) — or + bassPc for a specified slash bass (§7.20,
+ *  brief §8.3's "or specified bass"; the demo had no slash chords, so this path is
+ *  purely additive and golden parity is untouched);
+ *  >3 distinct pitch classes → the pc the bass covers is dropped from the uppers;
  *  candidate voicings = every rotation of the upper pcs stacked ascending from a base
  *  note in 48..62 whose pc matches the rotation head, rejected if the top exceeds 76;
  *  cost vs a previous voicing = sum of |Δ| over SORTED, index-clamped note lists;
@@ -18,10 +20,20 @@ export interface Voicing {
   dist: number
 }
 
-export function voice(ch: Pick<Chord, 'ints' | 'rootPc'>, prevUppers: readonly number[] | null = null): Voicing {
-  const bass = 36 + ch.rootPc
+export function voice(
+  ch: Pick<Chord, 'ints' | 'rootPc'> & Partial<Pick<Chord, 'bassPc'>>,
+  prevUppers: readonly number[] | null = null,
+): Voicing {
+  const bassPc = ch.bassPc ?? ch.rootPc
+  const bass = 36 + bassPc
   const pcs = [...new Set(ch.ints.map(i => (ch.rootPc + i) % 12))]
-  const upperPcs = pcs.length > 3 ? pcs.slice(1) : pcs
+  // A dense chord sheds one upper ONLY because the bass already doubles it. Root
+  // position: pcs[0] IS rootPc, so this is byte-identical to the demo's pcs.slice(1).
+  // Inversion: the doubled bass tone yields instead. Foreign bass (Cmaj7/D — the bass
+  // doubles nothing): keep all four uppers, since dropping the root there would erase
+  // the chord's identity (Cmaj7/D would sound as G6/D). Brief §8.3 allows four uppers.
+  const withoutBass = pcs.length > 3 ? pcs.filter(pc => pc !== bassPc) : pcs
+  const upperPcs = withoutBass.length < pcs.length ? withoutBass : pcs
   const n = upperPcs.length
   const opts: number[][] = []
   for (let r = 0; r < n; r++) {

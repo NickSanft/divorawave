@@ -1,9 +1,10 @@
 /** Parser tests (PLAN.md Phase 2.3): names + romans, unicode/ASCII equivalence,
- *  the two §7.3 demo-bug fixes, slash-bass root-position semantics (§7.4), and
- *  the §7.12 quality-collapse policy. */
+ *  the two §7.3 demo-bug fixes, specified-bass storage and voicing (§7.20,
+ *  superseding §7.4's root-position-only handling), and the §7.12 collapse policy. */
 import { describe, expect, it } from 'vitest'
-import { makeKey, parseName } from './chords.ts'
+import { chordFrom, makeKey, parseName, ROOTS } from './chords.ts'
 import { parseRoman } from './roman.ts'
+import { voice } from './voicing.ts'
 import { candidates } from '../engine/rules.ts'
 import { chips } from '../engine/chips.ts'
 
@@ -71,6 +72,95 @@ describe('parseName — names mode', () => {
     expect(m7).toMatchObject({ quality: 'maj7', semis: 3, bass: 'B' })
     expect(m7!.ints).toEqual([0, 4, 7, 11])
     expect(parseName('C/E', cmaj)!.bass).toBe('E')
+  })
+
+  it('stores the bass KEY-RELATIVELY and voices it (§7.20)', () => {
+    const inv = parseName('A/C♯', am)!
+    expect(inv.bassInterval).toBe(4) // a major third above the chord root
+    expect(inv.bassLo).toBe(2) // …spelled two letters up (A → C), so it stays a third
+    expect(inv.bassPc).toBe(1) // absolute C♯ — the voicing engine's bass note
+    expect(inv.name).toBe('A/C♯') // the deck shows the typed symbol faithfully
+    // the engine still sees the parent chord: statsId/roman/semis untouched
+    expect(inv).toMatchObject({ statsId: 'I', roman: 'I', semis: 0 })
+    expect(voice(inv).bass).toBe(36 + 1)
+  })
+
+  it('the bass transposes with the chord on a key change (A/C♯ → E/G♯)', () => {
+    const stored = parseName('A/C♯', am)!
+    const inEm = chordFrom(stored, makeKey('E', 'minor'))
+    expect(inEm.name).toBe('E/G♯')
+    expect(inEm.bass).toBe('G♯')
+    expect(inEm.bassPc).toBe(8)
+    expect(inEm.roman).toBe('I')
+    // …and back again, losslessly
+    expect(chordFrom(inEm, am).name).toBe('A/C♯')
+  })
+
+  it('spells transposed basses enharmonically (letters follow the chord, not the pitch class)', () => {
+    for (const [symbol, key, expected] of [
+      ['B♭/D', cmaj, 'B♭/D'],
+      ['C/D', cmaj, 'C/D'], // foreign bass, kept verbatim
+      ['Dm/F', am, 'Dm/F'],
+      ['E7/G♯', am, 'E7/G♯'],
+    ] as const) {
+      expect(parseName(symbol, key)!.name).toBe(expected)
+    }
+    // ASCII input, unicode display
+    expect(parseName('Bb/D', cmaj)!.name).toBe('B♭/D')
+    expect(parseName('E7/G#', am)!.name).toBe('E7/G♯')
+  })
+
+  it('round-trips: a slash chord re-parses to the same chord', () => {
+    for (const symbol of ['A/C♯', 'Cmaj7/B', 'Dm/F', 'C/D', 'B♭/D']) {
+      const first = parseName(symbol, am)
+      expect(first, symbol).toBeTruthy()
+      const again = parseName(first!.name, am)
+      expect(again, `${symbol} → ${first!.name}`).toBeTruthy()
+      expect(again!.name).toBe(first!.name)
+      expect(again!.bassPc).toBe(first!.bassPc)
+      expect(again!.bassInterval).toBe(first!.bassInterval)
+    }
+  })
+
+  it('slash spelling is self-consistent in EVERY key — the bass letter always sits bassLo letters above the DISPLAYED root', () => {
+    // this sweep is what surfaced the reference-frame bug: bassLo is measured from
+    // the root as spelled, so chordFrom must re-derive the letter from the spelled
+    // root — not from the pre-spelling cls.lo, which diverges wherever spell() takes
+    // its enharmonic fallback (it printed 'A/D♭' for an A major triad)
+    const LETTERS = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
+    const symbols = ['A/C♯', 'C/E', 'Cmaj7/B', 'Dm/F', 'B♭/D', 'E7/G♯', 'G/B', 'C/D']
+    for (const symbol of symbols) {
+      const parsed = parseName(symbol, am)!
+      expect(parsed, symbol).toBeTruthy()
+      for (const root of ROOTS) {
+        for (const mode of ['minor', 'major'] as const) {
+          const key = makeKey(root.n, mode)
+          const c = chordFrom(parsed, key)
+          const where = `${symbol} in ${root.n} ${mode} → ${c.name}`
+          // the printed symbol is exactly "<root><suffix>/<bass>"
+          expect(c.name.endsWith(`/${c.bass}`), where).toBe(true)
+          expect(c.name.startsWith(c.root), where).toBe(true)
+          // …and the two letters agree: bass letter === root letter + bassLo
+          const expectedLetter = LETTERS[(LETTERS.indexOf(c.root[0]!) + parsed.bassLo!) % 7]
+          expect(c.bass![0], `${where} (letter should be ${expectedLetter})`).toBe(expectedLetter)
+          // the sounding bass matches the printed one, and re-parsing is lossless
+          expect(c.bassPc, where).toBe((c.rootPc + parsed.bassInterval!) % 12)
+          expect(voice(c).bass, where).toBe(36 + c.bassPc!)
+          const reparsed = parseName(c.name, key)
+          expect(reparsed?.name, `re-parse ${where}`).toBe(c.name)
+        }
+      }
+    }
+  })
+
+  it('a malformed slash suffix fails the quality collapse (the bass guards are defensive-only)', () => {
+    // tonal folds an unusable bass back into the type token, so these die at §7.12
+    // rather than at parseName's bass guards — pinning the OUTCOME, not the path
+    expect(parseName('C/H', cmaj)).toBeNull()
+    expect(parseName('C/', cmaj)).toBeNull()
+    expect(parseName('C/Ebm', cmaj)).toBeNull()
+    // a doubled slash truncates to the first bass rather than erroring (accepted)
+    expect(parseName('C/E/G', cmaj)?.name).toBe('C/E')
   })
 })
 

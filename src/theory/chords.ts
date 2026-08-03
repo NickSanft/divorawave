@@ -40,17 +40,30 @@ export interface CandidateClass {
 export interface Chord extends CandidateClass {
   /** semitone intervals from the root (add9/madd9 use 14, NOT 2 — voicing input) */
   ints: readonly number[]
-  /** display symbol, unicode accidentals, e.g. 'B♭7', 'Am(add9)' */
+  /** display symbol, unicode accidentals, e.g. 'B♭7', 'Am(add9)', 'A/C♯' */
   name: string
   /** absolute root pitch class 0–11 */
   rootPc: number
   /** spelled root name (unicode), e.g. 'B♭' */
   root: string
-  /** slash-bass pitch class (display spelling) when entered; POC voicing ignores it (PLAN §7.4) */
+  /** spelled slash bass (unicode) when specified, e.g. 'C♯' — display only */
   bass?: string
+  /** absolute slash-bass pitch class 0–11; the voicing engine's bass note (§7.20) */
+  bassPc?: number
+  /** KEY-RELATIVE bass storage (§7.20): semitones above the chord root. Key-relative
+   *  so a key change transposes the inversion with the chord (A/C♯ → E/G♯), per
+   *  brief §4.2's "the stored progression is the source of truth". */
+  bassInterval?: number
+  /** letter distance (0–6) from the chord root's letter to the bass's — carries the
+   *  correct enharmonic spelling through transposition (C♯ stays a third, not a ♭IV) */
+  bassLo?: number
   /** original symbol suffix when the quality was collapsed onto Q (PLAN §7.12), else [] */
   extensions: string[]
 }
+
+/** Anything materializable in a key: a candidate class, optionally carrying the
+ *  slash-bass and quality-collapse metadata a parsed chord picked up. */
+export type Materializable = CandidateClass & Partial<Pick<Chord, 'bassInterval' | 'bassLo' | 'extensions'>>
 
 export interface Key {
   root: string
@@ -103,11 +116,41 @@ function spell(key: Key, semis: number, lo: number): string {
   return letter + (acc === 1 ? '♯' : acc === -1 ? '♭' : '')
 }
 
-/** Materialize a candidate class in a key (verbatim port + root/extensions fields). */
-export function chordFrom(cls: CandidateClass, key: Key): Chord {
+/** Materialize a candidate class in a key (verbatim port + root/bass/extensions).
+ *  Idempotent: re-materializing an already-materialized Chord in another key
+ *  transposes it, slash bass and quality-collapse record included. */
+export function chordFrom(cls: Materializable, key: Key): Chord {
   const q = Q[cls.quality]
   const root = spell(key, cls.semis, cls.lo)
-  return { ...cls, ints: q.ints, name: root + q.suf, rootPc: (key.pc + cls.semis) % 12, root, extensions: [] }
+  const rootPc = (key.pc + cls.semis) % 12
+  const chord: Chord = {
+    ...cls,
+    ints: q.ints,
+    name: root + q.suf,
+    rootPc,
+    root,
+    extensions: cls.extensions ?? [],
+    // the bass is ALWAYS a function of bassInterval — never inherited from the
+    // spread, so a stale bass can't outlive the interval that justified it
+    bass: undefined,
+    bassPc: undefined,
+  }
+  if (cls.bassInterval !== undefined) {
+    // Spell the bass through the same key-relative machinery as the root, so the
+    // inversion transposes correctly: A/C♯ in A minor → E/G♯ in E minor (§7.20).
+    // bassLo is measured from the root as ACTUALLY SPELLED, so the letter must be
+    // re-derived from `root` here — not from cls.lo, which is the pre-spelling
+    // letter and diverges whenever spell() takes its enharmonic fallback (that
+    // mismatch printed nonsense like "A/D♭" for an A major triad).
+    const interval = ((cls.bassInterval % 12) + 12) % 12
+    const keyLetter = LETTERS.indexOf(key.root[0] as (typeof LETTERS)[number])
+    const rootLetter = LETTERS.indexOf(root[0] as (typeof LETTERS)[number])
+    const bassLoFromKey = ((rootLetter + (cls.bassLo ?? 0) - keyLetter) % 7 + 7) % 7
+    chord.bassPc = (rootPc + interval) % 12
+    chord.bass = spell(key, (cls.semis + interval) % 12, bassLoFromKey)
+    chord.name += `/${chord.bass}`
+  }
+  return chord
 }
 
 /* ------------------------------------------------------------------ */
@@ -119,10 +162,9 @@ export function normalizeAccidentals(s: string): string {
   return s.replace(/♯/g, '#').replace(/♭/g, 'b')
 }
 
-/** ASCII → unicode for display strings (case-sensitive: note letters stay intact). */
-export function toDisplayAccidentals(s: string): string {
-  return s.replace(/#/g, '♯').replace(/b/g, '♭')
-}
+/* (ASCII → unicode display conversion intentionally absent: spell() is the single
+   spelling authority, so no caller needs a blanket accidental replace — which would
+   also mangle any lowercase 'b' that isn't an accidental.) */
 
 /* ------------------------------------------------------------------ */
 /* name parsing (names mode) — tonal-assisted, Q-collapse per §7.12   */
@@ -199,8 +241,8 @@ function qualityFromType(type: string): QualityHit | null {
 }
 
 /** Parse a chord symbol in names mode → key-relative Chord via the classify snap.
- *  Accepts unicode and ASCII accidentals; slash bass is stored (voicing ignores it, §7.4).
- *  Returns null for anything that can't collapse onto the Q vocabulary (§7.12). */
+ *  Accepts unicode and ASCII accidentals; a slash bass is stored key-relatively and
+ *  voiced (§7.20). Returns null for anything that can't collapse onto Q (§7.12). */
 export function parseName(str: string, key: Key): Chord | null {
   const trimmed = str.trim()
   if (!trimmed) return null
@@ -217,7 +259,14 @@ export function parseName(str: string, key: Key): Chord | null {
   if (bassRaw) {
     const bpc = Note.chroma(bassRaw)
     if (!Number.isFinite(bpc)) return null
-    chord.bass = toDisplayAccidentals(bassRaw)
+    const rootLetterIdx = LETTERS.indexOf(chord.root[0] as (typeof LETTERS)[number])
+    const bassLetterIdx = LETTERS.indexOf(bassRaw[0]!.toUpperCase() as (typeof LETTERS)[number])
+    if (rootLetterIdx < 0 || bassLetterIdx < 0) return null
+    // store the bass key-relatively, then re-materialize so name/bass/bassPc are
+    // computed by the single code path that also handles transposition (§7.20)
+    chord.bassInterval = ((bpc! - chord.rootPc) % 12 + 12) % 12
+    chord.bassLo = ((bassLetterIdx - rootLetterIdx) % 7 + 7) % 7
+    return chordFrom(chord, key)
   }
   return chord
 }

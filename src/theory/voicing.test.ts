@@ -57,6 +57,60 @@ describe('voice()', () => {
     expect(f.dist).toBeLessThanOrEqual(2)
   })
 
+  it('specified bass: the bass note is the slash bass, not the root (§7.20)', () => {
+    // C/E — first inversion of a triad: bass E (MIDI 40), uppers keep the full triad
+    const inv = voice({ ints: Q.maj.ints, rootPc: 0, bassPc: 4 })
+    expect(inv.bass).toBe(40)
+    expect(pcset(inv.uppers)).toEqual(new Set([0, 4, 7]))
+    expect(inv.all[0]).toBe(40)
+    // and it really differs from root position
+    expect(voice({ ints: Q.maj.ints, rootPc: 0 }).bass).toBe(36)
+  })
+
+  it('specified bass: a dense chord drops the DOUBLED bass tone from the uppers', () => {
+    // Cmaj7/B — B in the bass, so the uppers are C E G (not E G B)
+    const v = voice({ ints: Q.maj7.ints, rootPc: 0, bassPc: 11 })
+    expect(v.bass).toBe(47)
+    expect(pcset(v.uppers)).toEqual(new Set([0, 4, 7]))
+    expect(v.uppers.length).toBe(3)
+  })
+
+  it('specified bass: a FOREIGN bass keeps the whole chord above it (identity intact)', () => {
+    // Cmaj7/D — D doubles nothing, so nothing yields: dropping the root here would
+    // leave E G B over D, i.e. G6/D, and the chord would stop being a Cmaj7
+    const v = voice({ ints: Q.maj7.ints, rootPc: 0, bassPc: 2 })
+    expect(v.bass).toBe(38)
+    expect(pcset(v.uppers)).toEqual(new Set([0, 4, 7, 11]))
+    expect(v.uppers.length).toBe(4) // brief §8.3 allows three to four upper voices
+    for (const n of v.uppers) { expect(n).toBeGreaterThanOrEqual(48); expect(n).toBeLessThanOrEqual(76) }
+  })
+
+  it('specified bass never collides with or rises above the upper band', () => {
+    for (const bassPc of [0, 1, 4, 7, 11]) {
+      const v = voice({ ints: Q.dom7.ints, rootPc: 5, bassPc })
+      expect(v.bass).toBeGreaterThanOrEqual(36)
+      expect(v.bass).toBeLessThanOrEqual(47)
+      expect(v.bass).toBeLessThan(Math.min(...v.uppers))
+    }
+  })
+
+  it('a bassPc equal to the root is indistinguishable from no bass at all (parity guard)', () => {
+    for (const quality of Object.keys(Q) as Quality[]) {
+      for (const rootPc of [0, 5, 9]) {
+        const plain = voice({ ints: Q[quality].ints, rootPc })
+        const explicit = voice({ ints: Q[quality].ints, rootPc, bassPc: rootPc })
+        expect(explicit).toEqual(plain)
+      }
+    }
+  })
+
+  it('inversions still voice-lead: the uppers minimize motion, the bass stays put', () => {
+    const am = voice({ ints: Q.min.ints, rootPc: 9 })
+    const fOverA = voice({ ints: Q.maj.ints, rootPc: 5, bassPc: 9 }, am.uppers)
+    expect(fOverA.bass).toBe(45) // A in the bass — pinned by the slash, not searched
+    expect(fOverA.dist).toBeLessThanOrEqual(2) // F/A shares A and C with Am
+  })
+
   it('clamps sanely between 3-note and 4-note voicings (index-clamped pairing)', () => {
     const triad = voice({ ints: Q.maj.ints, rootPc: 0 })
     const seventh = voice({ ints: Q.dom7.ints, rootPc: 7 }, triad.uppers)

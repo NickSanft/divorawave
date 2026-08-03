@@ -107,6 +107,42 @@ describe('App (phase 4)', () => {
     expect(state.deck.value.map(c => c.roman)).toEqual(['i'])
   })
 
+  it('slash chords survive the whole deck round trip: typed → displayed → transposed (§7.20)', async () => {
+    const { state, container, getByRole } = await mount()
+    const input = container.querySelector<HTMLInputElement>('[data-chordinput]')!
+    fireEvent.input(input, { target: { value: 'A/C#' } })
+    fireEvent.keyDown(input, { key: 'Enter' })
+    await waitFor(() => {
+      expect(container.querySelector('.dv-tile .dv-tile-name')!.textContent).toBe('A/C♯')
+    })
+    // the roman line still shows the parent degree — the engine's view of the chord
+    expect(container.querySelector('.dv-tile .dv-tile-rom')!.textContent).toBe('I')
+    expect(state.deck.value[0]).toMatchObject({ statsId: 'I', bassInterval: 4, bassLo: 2 })
+
+    // the inversion transposes with the key…
+    fireEvent.change(getByRole('combobox', { name: 'Key root' }), { target: { value: 'E' } })
+    await waitFor(() => {
+      expect(container.querySelector('.dv-tile .dv-tile-name')!.textContent).toBe('E/G♯')
+    })
+    // …including through A♭, where spell() takes its enharmonic fallback — the case
+    // that printed a self-contradictory "A/D♭" before the reference-frame fix
+    fireEvent.change(getByRole('combobox', { name: 'Key root' }), { target: { value: 'A♭' } })
+    await waitFor(() => {
+      expect(container.querySelector('.dv-tile .dv-tile-name')!.textContent).toBe('A♭/C')
+    })
+
+    // notation toggle swaps the two lines, bass intact on whichever shows the symbol
+    fireEvent.click(getByRole('button', { name: 'I–IV' }))
+    await waitFor(() => {
+      expect(container.querySelector('.dv-tile .dv-tile-name')!.textContent).toBe('I')
+    })
+    expect(container.querySelector('.dv-tile .dv-tile-rom')!.textContent).toBe('A♭/C')
+
+    // and it pops off the deck like any other chord
+    fireEvent.click(container.querySelector('.dv-x')!)
+    await waitFor(() => expect(state.deck.value.length).toBe(0))
+  })
+
   it('key change re-labels and preserves the stored progression (brief §4.2)', async () => {
     const { state, container, getByRole } = await mount()
     const input = container.querySelector<HTMLInputElement>('[data-chordinput]')!
